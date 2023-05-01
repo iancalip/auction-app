@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class='m-4'>
+  <head>
+    <title>AuctionApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <header>
+      <h1> Leilão </h1>
+      <nav>
+        <%= link_to 'Home', root_path %> |
+        <% if user_signed_in? %>
+          <%= current_user.email %>
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Login', new_user_session_path %>
+        <% end %>
+        <hr>
+      </nav>
+    </header>
+    <main>
+      <div>
+        <%= alert %>
+        <%= notice %>
+      </div>
+      <%= yield %>
+    </main>
+  </body>
+</html>

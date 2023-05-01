@@ -1,0 +1,62 @@
+require 'rails_helper'
+
+describe 'Usuário se autentica' do
+    it 'com sucesso' do
+        #Arrange
+        #Act
+        visit root_path
+        click_on 'Login'
+        click_on 'Sign up'
+        within('form') do
+            fill_in 'Nome', with: 'Teste'
+            fill_in 'E-mail', with: 'teste@email.com'
+            fill_in 'Senha', with: 'password'
+            fill_in 'CPF', with: '000.000.000-00'
+            fill_in 'Confirme sua senha', with: 'password'
+        end
+        click_on 'Sign up'
+
+        #Assert
+        expect(page).to have_button 'Sair'
+        expect(page).to have_content 'teste@email.com'
+        expect(page).to have_content 'Usuário cadastrado com sucesso'
+        expect(User.last.name).to eq 'Teste'
+    end
+
+    it 'sem sucesso, dados indisponiveis' do
+        #Arrange
+        User.create!(name: 'Teste', cpf: '000.000.000-00', email: 'teste@email.com', password: 'password')
+        #Act
+        visit root_path
+        click_on 'Login'
+        click_on 'Sign up'
+        fill_in 'Nome', with: 'Teste'
+        fill_in 'E-mail', with: 'teste@email.com'
+        fill_in 'Senha', with: 'password'
+        fill_in 'CPF', with: '000.000.000-00'
+        fill_in 'Confirme sua senha', with: 'password'
+        click_on 'Sign up'
+
+        #Assert
+        expect(page).to have_content 'Não foi possível salvar usuário: 2 erros.'
+        expect(page).to have_content 'CPF já está em uso'
+        expect(page).to have_content 'E-mail já está em uso'
+    end
+
+    it 'sem sucesso, senha inválida' do
+        #Arrange
+        #Act
+        visit root_path
+        click_on 'Login'
+        click_on 'Sign up'
+        fill_in 'Nome', with: 'Teste'
+        fill_in 'E-mail', with: 'teste@email.com'
+        fill_in 'Senha', with: '12345'
+        fill_in 'CPF', with: '000.000.000-00'
+        fill_in 'Confirme sua senha', with: 'password'
+        click_on 'Sign up'
+
+        #Assert
+        expect(page).to have_content 'Senha é muito curto (mínimo: 6 caracteres)'
+    end
+end

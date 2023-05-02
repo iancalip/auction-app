@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      product: Produto
+    attributes:
+      product:
+        name: "Nome"
+        weight: "Peso"
+        width: "Largura"
+        height: "Altura"
+        depth: "Profundidade"
+        category: "Categoria"
+        description: "Descrição"
+        identifier: "Identificador"

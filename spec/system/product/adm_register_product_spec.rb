@@ -32,13 +32,13 @@ describe 'ADM faz login' do
         visit root_path
         click_on 'Cadastrar produto'
         #Assert
-        expect(page).to have_field('Name')
-        expect(page).to have_field('Weight')
-        expect(page).to have_field('Width')
-        expect(page).to have_field('Height')
-        expect(page).to have_field('Depth')
-        expect(page).to have_field('Category')
-        expect(page).to have_field('Description')
+        expect(page).to have_field('Nome')
+        expect(page).to have_field('Peso')
+        expect(page).to have_field('Largura')
+        expect(page).to have_field('Altura')
+        expect(page).to have_field('Profundidade')
+        expect(page).to have_field('Categoria')
+        expect(page).to have_field('Descrição')
         expect(page).to have_field('image', type: 'file')
     end
 
@@ -50,15 +50,14 @@ describe 'ADM faz login' do
         visit root_path
         click_on 'Cadastrar produto'
 
-        fill_in 'Name', with: 'Produto'
-        fill_in 'Weight', with: 8000
-        fill_in 'Width', with: 70
-        fill_in 'Height', with: 45
-        fill_in 'Depth', with: 10
-        fill_in 'Category', with: 'categoria'
-        fill_in 'Description', with: 'descrição'
+        fill_in 'Nome', with: 'Produto'
+        fill_in 'Peso', with: 8000
+        fill_in 'Largura', with: 70
+        fill_in 'Altura', with: 45
+        fill_in 'Profundidade', with: 10
+        fill_in 'Categoria', with: 'Categoria'
+        fill_in 'Descrição', with: 'Descrição'
         click_on 'Enviar'
-
         #Assert
        expect(page).to have_content('Produto cadastrado com sucesso')
        expect(current_path).to eq root_path
@@ -72,25 +71,25 @@ describe 'ADM faz login' do
         visit root_path
         click_on 'Cadastrar produto'
 
-        fill_in 'Name', with: ''
-        fill_in 'Weight', with: nil
-        fill_in 'Width', with: nil
-        fill_in 'Height', with: nil
-        fill_in 'Depth', with: nil
-        fill_in 'Category', with: ''
-        fill_in 'Description', with: ''
+        fill_in 'Nome', with: ''
+        fill_in 'Peso', with: nil
+        fill_in 'Largura', with: nil
+        fill_in 'Altura', with: nil
+        fill_in 'Profundidade', with: nil
+        fill_in 'Categoria', with: ''
+        fill_in 'Descrição', with: ''
         click_on 'Enviar'
 
         #Assert
         expect(page).to have_content('Produto não cadastrado, preencha todos os campos.')
-        expect(page).to have_content('Name não pode ficar em branco')
-        expect(page).to have_content('Description não pode ficar em branco')
-        expect(page).to have_content('Weight não pode ficar em branco')
-        expect(page).to have_content('Width não pode ficar em branco')
-        expect(page).to have_content('Height não pode ficar em branco')
-        expect(page).to have_content('Depth não pode ficar em branco')
-        expect(page).to have_content('Category não pode ficar em branco')
-        expect(current_path).to eq new_product_path
+        expect(page).to have_content('Nome não pode ficar em branco')
+        expect(page).to have_content('Descrição não pode ficar em branco')
+        expect(page).to have_content('Peso não pode ficar em branco')
+        expect(page).to have_content('Largura não pode ficar em branco')
+        expect(page).to have_content('Altura não pode ficar em branco')
+        expect(page).to have_content('Profundidade não pode ficar em branco')
+        expect(page).to have_content('Categoria não pode ficar em branco')
+        expect(current_path).to eq products_path
     end
 
     it 'mas não preenche com os formatos de dados corretos ao cadastrar produto' do
@@ -101,19 +100,19 @@ describe 'ADM faz login' do
         visit root_path
         click_on 'Cadastrar produto'
 
-        fill_in 'Name', with: 'produto'
-        fill_in 'Weight', with: 'a'
-        fill_in 'Width', with: 'a'
-        fill_in 'Height', with: 'a'
-        fill_in 'Depth', with: 'a'
-        fill_in 'Category', with: 'categoria'
-        fill_in 'Description', with: 'descrição'
+        fill_in 'Nome', with: 'Produto'
+        fill_in 'Peso', with: 'a'
+        fill_in 'Largura', with: 'a'
+        fill_in 'Altura', with: 'a'
+        fill_in 'Profundidade', with: 'a'
+        fill_in 'Categoria', with: 'Categoria'
+        fill_in 'Descrição', with: 'Descrição'
         click_on 'Enviar'
 
         #Assert
-        expect(page).to have_content('Weight não é um número')
-        expect(page).to have_content('Width não é um número')
-        expect(page).to have_content('Height não é um número')
-        expect(page).to have_content('Depth não é um número')
+        expect(page).to have_content('Peso não é um número')
+        expect(page).to have_content('Largura não é um número')
+        expect(page).to have_content('Altura não é um número')
+        expect(page).to have_content('Profundidade não é um número')
     end
 end

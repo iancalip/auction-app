@@ -21,6 +21,7 @@ describe 'Usuário se autentica' do
             expect(page).to have_content 'teste@email.com'
         end
         expect(page).to have_content 'Login efetuado com sucesso'
+        expect(page).not_to have_link 'Cadastrar produto'
     end
 
     it 'faz logout' do

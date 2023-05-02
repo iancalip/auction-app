@@ -1,0 +1,43 @@
+<% if @product.errors.any? %>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @product) do |f|%>
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+    <div>
+        <%= f.label :weight %>
+        <%= f.number_field :weight %>
+    </div>
+    <div>
+        <%= f.label :width %>
+        <%= f.number_field :width %>
+    </div>
+    <div>
+        <%= f.label :height %>
+        <%= f.number_field :height %>
+    </div>
+    <div>
+        <%= f.label :depth %>
+        <%= f.number_field :depth %>
+    </div>
+    <div>
+        <%= f.label :category %>
+        <%= f.text_field :category %>
+    </div>
+    <div>
+        <%= f.label :description %>
+        <%= f.text_field :description %>
+    </div>
+    <%= f.label :image %>
+    <%= f.file_field :image, id: 'image' %><br/>
+    <div>
+        <%= f.submit 'Enviar' %>
+    </div>
+<% end %>

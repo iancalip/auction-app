@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
     before_validation :generate_identifier, on: :create
-    validates :name, :description, :weight, :width, :height, :depth, :category, :identifier, presence: true
+    validates :name, :description, :weight, :width, :height, :depth, :category, :identifier, :image, presence: true
     validates :weight, :width, :height, :depth, numericality: true
     validates :identifier, uniqueness: true
     validates :identifier, length: { is: 10 }

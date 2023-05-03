@@ -57,6 +57,7 @@ describe 'ADM faz login' do
         fill_in 'Profundidade', with: 10
         fill_in 'Categoria', with: 'Categoria'
         fill_in 'Descrição', with: 'Descrição'
+        attach_file('image', Rails.root.join('spec/support/test_image.jpg'))
         click_on 'Enviar'
         #Assert
        expect(page).to have_content('Produto cadastrado com sucesso')
@@ -89,6 +90,7 @@ describe 'ADM faz login' do
         expect(page).to have_content('Altura não pode ficar em branco')
         expect(page).to have_content('Profundidade não pode ficar em branco')
         expect(page).to have_content('Categoria não pode ficar em branco')
+        expect(page).to have_content('Imagem não pode ficar em branco')
         expect(current_path).to eq products_path
     end
 
@@ -107,6 +109,7 @@ describe 'ADM faz login' do
         fill_in 'Profundidade', with: 'a'
         fill_in 'Categoria', with: 'Categoria'
         fill_in 'Descrição', with: 'Descrição'
+        attach_file('image', Rails.root.join('spec/support/test_image.jpg'))
         click_on 'Enviar'
 
         #Assert

@@ -37,12 +37,14 @@ class LotsController < ApplicationController
 
     def update_status
         if current_user.id != @lot.created_by_user_id &&  @lot.pending?
-            @lot.approved!
+            @lot.approved! && @lot.update(approved_by_user_id: current_user.id)
             redirect_to @lot; flash[:notice] =  "Lote aprovado com sucesso!"
         else
             redirect_to @lot; flash[:notice] = "Você não tem permissão para isso"
         end
     end
+
+    #criar outro update_status para botao de cancelar, depois de cobrir as funcionalidades obrigatórias da app
 
     def assign_products
         @products = Product.where(lot_id: nil)

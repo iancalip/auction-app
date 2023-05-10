@@ -35,5 +35,6 @@ describe 'User log in' do
         expect(page).not_to have_link('Editar')
         expect(page).not_to have_button('Adicionar Produto')
         expect(page).not_to have_button('Cancelar')
+        expect(page).not_to have_content('Status: Aprovado')
     end
 end

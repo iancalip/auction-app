@@ -87,5 +87,4 @@ describe 'User log in' do
         expect(page).to have_content('Oferta mínima não pode ficar em branco')
         expect(page).to have_content('Lance mínimo não pode ficar em branco')
     end
-
 end

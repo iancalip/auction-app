@@ -1,0 +1,17 @@
+<h4>Adicionar Produtos: Lote - <%= @lot.code %></h4>
+
+<%= form_with url: update_products_lot_path(@lot), method: :post do |form| %>
+  <h5>Produtos</h5>
+  <ul>
+    <% @products.each do |product| %>
+      <li>
+        <%= form.check_box :product_ids, { multiple: true, id: "product_#{product.id}" }, product.id, nil %>
+        <%= form.label product.name %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="form-group">
+    <%= form.submit 'Salvar', class: 'btn btn-success' %>
+  </div>
+<% end %>

@@ -11,7 +11,7 @@ describe 'Usuário se autentica' do
             fill_in 'Nome', with: 'Teste'
             fill_in 'E-mail', with: 'teste@email.com'
             fill_in 'Senha', with: 'password'
-            fill_in 'CPF', with: '000.000.000-00'
+            fill_in 'CPF', with: '02324252481'
             fill_in 'Confirme sua senha', with: 'password'
         end
         click_on 'Sign up'
@@ -25,7 +25,7 @@ describe 'Usuário se autentica' do
 
     it 'sem sucesso, dados indisponiveis' do
         #Arrange
-        User.create!(name: 'Teste', cpf: '000.000.000-00', email: 'teste@email.com', password: 'password')
+        User.create!(name: 'Teste', cpf: '02324252481', email: 'teste@email.com', password: 'password')
         #Act
         visit root_path
         click_on 'Login'
@@ -33,7 +33,7 @@ describe 'Usuário se autentica' do
         fill_in 'Nome', with: 'Teste'
         fill_in 'E-mail', with: 'teste@email.com'
         fill_in 'Senha', with: 'password'
-        fill_in 'CPF', with: '000.000.000-00'
+        fill_in 'CPF', with: '02324252481'
         fill_in 'Confirme sua senha', with: 'password'
         click_on 'Sign up'
 
@@ -52,8 +52,8 @@ describe 'Usuário se autentica' do
         fill_in 'Nome', with: 'Teste'
         fill_in 'E-mail', with: 'teste@email.com'
         fill_in 'Senha', with: '12345'
-        fill_in 'CPF', with: '000.000.000-00'
         fill_in 'Confirme sua senha', with: 'password'
+        fill_in 'CPF', with: '02324252481'
         click_on 'Sign up'
 
         #Assert

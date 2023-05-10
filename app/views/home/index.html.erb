@@ -1,1 +1,13 @@
-<%= link_to 'Cadastrar produto', new_product_path if current_user&.admin? %>
+<%= link_to 'Cadastrar Produto', new_product_path if current_user&.admin? %> |
+<%= link_to 'Criar Lote', new_lot_path if current_user&.admin? %>
+
+<% @lots.each do |l| %>
+    <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><%=l.code%></h5>
+    <p class="card-text"><%=l.start_date%> - <%=l.end_date%></p>
+    <a href="#" class="btn btn-primary"><%=link_to 'Ver Detalhes', lot_path(l)%></a>
+  </div>
+</div>
+<% end %>

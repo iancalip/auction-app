@@ -1,0 +1,33 @@
+<% if @lot.errors.any? %>
+  <ul>
+    <% @lot.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @lot) do |f|%>
+    <div>
+        <%= f.label :code %>
+        <%= f.text_field :code %>
+    </div>
+    <div>
+        <%= f.label :start_date %>
+        <%= f.date_field :start_date %>
+    </div>
+    <div>
+        <%= f.label :end_date %>
+        <%= f.date_field :end_date %>
+    </div>
+    <div>
+        <%= f.label :minimum_bid %>
+        <%= f.number_field :minimum_bid %>
+    </div>
+    <div>
+        <%= f.label :minimum_bid_difference %>
+        <%= f.number_field :minimum_bid_difference %>
+    </div>
+    <div>
+        <%= f.submit 'Enviar' %>
+    </div>
+<% end %>

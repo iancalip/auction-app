@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'ADM faz login' do
     it 'e vê link Cadastrar produto' do
         #Arrange
-        User.create!(name: 'adm', cpf: '000.000.000-00', email: 'adm@leilaodogalpao.com.br', password: 'password')
+        User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
         visit root_path
         within('nav') do
@@ -18,19 +18,19 @@ describe 'ADM faz login' do
         within('nav') do
             expect(page).not_to have_link 'Login'
             expect(page).to have_button 'Sair'
-            expect(page).to have_content 'adm@leilaodogalpao.com.br'
+            expect(page).to have_content 'adm | adm@leilaodogalpao.com.br'
         end
         expect(page).to have_content 'Login efetuado com sucesso'
-        expect(page).to have_link 'Cadastrar produto'
+        expect(page).to have_link 'Cadastrar Produto'
     end
 
     it 'e vê página de cadastro de produto' do
         #Arrange
-        adm = User.create!(name: 'adm', cpf: '000.000.000-00', email: 'adm@leilaodogalpao.com.br', password: 'password')
+        adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
         login_as adm
         visit root_path
-        click_on 'Cadastrar produto'
+        click_on 'Cadastrar Produto'
         #Assert
         expect(page).to have_field('Nome')
         expect(page).to have_field('Peso')
@@ -44,11 +44,11 @@ describe 'ADM faz login' do
 
     it 'cadastra produto e volta pra tela inicial' do
         #Arrange
-        adm = User.create!(name: 'adm', cpf: '000.000.000-00', email: 'adm@leilaodogalpao.com.br', password: 'password')
+        adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
         login_as adm
         visit root_path
-        click_on 'Cadastrar produto'
+        click_on 'Cadastrar Produto'
 
         fill_in 'Nome', with: 'Produto'
         fill_in 'Peso', with: 8000
@@ -66,11 +66,11 @@ describe 'ADM faz login' do
 
     it 'mas deixa campos obrigatórios em branco ao cadastrar produto' do
         #Arrange
-        adm = User.create!(name: 'adm', cpf: '000.000.000-00', email: 'adm@leilaodogalpao.com.br', password: 'password')
+        adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
         login_as adm
         visit root_path
-        click_on 'Cadastrar produto'
+        click_on 'Cadastrar Produto'
 
         fill_in 'Nome', with: ''
         fill_in 'Peso', with: nil
@@ -96,11 +96,11 @@ describe 'ADM faz login' do
 
     it 'mas não preenche com os formatos de dados corretos ao cadastrar produto' do
         #Arrange
-        adm = User.create!(name: 'adm', cpf: '000.000.000-00', email: 'adm@leilaodogalpao.com.br', password: 'password')
+        adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
         login_as adm
         visit root_path
-        click_on 'Cadastrar produto'
+        click_on 'Cadastrar Produto'
 
         fill_in 'Nome', with: 'Produto'
         fill_in 'Peso', with: 'a'

@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      lot: Produto
+    attributes:
+      lot:
+        code: "Código do lote"
+        start_date: "Data do leilão "
+        end_date: "Fim do leilão"
+        minimum_bid: "Oferta mínima"
+        minimum_bid_difference: "Lance mínimo"
+        status: "Status"
+        created_by_user: "Criado por"
+        approved_by_user: "Aprovador por"
+    enums:
+      lot:
+        status:
+          pending: "Aguardando aprovação"
+          approved: "Aprovado"
+          canceled: "Cancelado"

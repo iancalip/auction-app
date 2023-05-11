@@ -45,8 +45,8 @@ describe 'User log in' do
         visit root_path
         click_on 'Criar Lote'
         fill_in 'Código', with: 'ABC123456'
-        fill_in 'Data do leilão', with: 5.days.from_now
-        fill_in 'Fim do leilão', with: 10.days.from_now
+        fill_in 'Data do leilão', with: 5.days.from_now.to_date
+        fill_in 'Fim do leilão', with: 10.days.from_now.to_date
         fill_in 'Oferta mínima', with: 20
         fill_in 'Lance mínimo', with: 15
         click_on 'Enviar'
@@ -58,8 +58,8 @@ describe 'User log in' do
         expect(page).to have_button('Cancelar')
         expect(page).to have_content('Lote criado com sucesso')
         expect(page).to have_content('Código do lote: ABC123456')
-        expect(page).to have_content("Data do leilão : #{5.days.from_now.to_date}")
-        expect(page).to have_content("Fim do leilão: #{10.days.from_now.to_date}")
+        expect(page).to have_content("Data do leilão: #{5.day.from_now.strftime("%d/%m/%Y")}")
+        expect(page).to have_content("Fim do leilão: #{10.days.from_now.strftime("%d/%m/%Y")}")
         expect(page).to have_content('Oferta mínima: R$20.0 ')
         expect(page).to have_content('Lance mínimo: R$15.0')
         expect(page).to have_link('Adicionar Produto')

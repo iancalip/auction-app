@@ -23,8 +23,8 @@ describe 'Adm adds product' do
         expect(current_path).to eq lot_path(lot)
         expect(page).to have_content('Produtos vinculados ao lote com sucesso!')
         expect(page).to have_content('Código do lote: ABC123456')
-        expect(page).to have_content("Data do leilão : #{1.day.from_now.to_date}")
-        expect(page).to have_content("Fim do leilão: #{3.day.from_now.to_date}")
+        expect(page).to have_content("Data do leilão: #{1.day.from_now.to_date.strftime("%d/%m/%Y")}")
+        expect(page).to have_content("Fim do leilão: #{3.days.from_now.to_date.strftime("%d/%m/%Y")}")
         expect(page).to have_content('Oferta mínima: R$2500.0')
         expect(page).to have_content('Lance mínimo: R$70.0')
         expect(page).to have_content('Status: Aguardando aprovação')
@@ -35,7 +35,7 @@ describe 'Adm adds product' do
         #lembrete p adicionar o produto nessa view depois
     end
 
-    it 'and cant add same product to another lot' do
+    it 'and can only see available products' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.90,
@@ -68,13 +68,14 @@ describe 'Adm adds product' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         other_adm = User.create!(name: 'adm2', cpf: '86160256505', email: 'adm2@leilaodogalpao.com.br', password: 'password')
+        lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 2500.0,
+                        minimum_bid_difference: 70.0, created_by_user: other_adm)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro')
+                                category: 'categoria', description: 'celular caro', lot_id: nil)
         product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
                                 filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
         product.save!
-        lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 2500.0,
-                            minimum_bid_difference: 70.0, created_by_user: other_adm)
+
         #Act
         login_as(adm)
         visit root_path
@@ -87,8 +88,8 @@ describe 'Adm adds product' do
         expect(current_path).to eq lot_path(lot)
         expect(page).to have_content('Produtos vinculados ao lote com sucesso!')
         expect(page).to have_content('Código do lote: ABC123456')
-        expect(page).to have_content("Data do leilão : #{1.day.from_now.to_date}")
-        expect(page).to have_content("Fim do leilão: #{3.day.from_now.to_date}")
+        expect(page).to have_content("Data do leilão: #{1.day.from_now.to_date.strftime("%d/%m/%Y")}")
+        expect(page).to have_content("Fim do leilão: #{3.days.from_now.to_date.strftime("%d/%m/%Y")}")
         expect(page).to have_content('Oferta mínima: R$2500.0')
         expect(page).to have_content('Lance mínimo: R$70.0')
         expect(page).to have_content('Status: Aguardando aprovação')
@@ -98,12 +99,12 @@ describe 'Adm adds product' do
         expect(page).to have_link('Adicionar Produto')
     end
 
-    it 'but cant see add product and approve button' do
+    it 'but cant add product or approve an already approved lot' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         other_adm = User.create!(name: 'adm2', cpf: '86160256505', email: 'adm2@leilaodogalpao.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.90,
-                        minimum_bid_difference: 19.90, created_by_user: other_adm, status: :approved)
+                        minimum_bid_difference: 19.90, created_by_user: other_adm, approved_by_user: adm, status: :approved)
         #Act
         login_as(adm)
         visit root_path

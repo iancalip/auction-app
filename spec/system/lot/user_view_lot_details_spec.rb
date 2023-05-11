@@ -14,8 +14,8 @@ describe 'User log in' do
         #Assert
         expect(current_path).to eq lot_path(lot)
         expect(page).to have_content('Código do lote: ABC123456')
-        expect(page).to have_content("Data do leilão : #{1.days.from_now.to_date}")
-        expect(page).to have_content("Fim do leilão: #{3.days.from_now.to_date}")
+        expect(page).to have_content("Data do leilão: #{1.day.from_now.strftime("%d/%m/%Y")}")
+        expect(page).to have_content("Fim do leilão: #{3.days.from_now.strftime("%d/%m/%Y")}")
         expect(page).to have_content('Oferta mínima: R$49.9')
         expect(page).to have_content('Lance mínimo: R$19.9')
     end

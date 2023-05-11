@@ -1,7 +1,7 @@
 
 <strong><%= Lot.human_attribute_name(:code) %>:</strong> <%= @lot.code %><br/>
-<strong><%= Lot.human_attribute_name(:start_date) %>:</strong> <%= @lot.start_date %><br/>
-<strong><%= Lot.human_attribute_name(:end_date) %>:</strong> <%= @lot.end_date %><br/>
+<strong><%= Lot.human_attribute_name(:start_date)%>:</strong> <%= @lot.start_date.strftime("%d/%m/%Y") %><br/>
+<strong><%= Lot.human_attribute_name(:end_date) %>:</strong> <%= @lot.end_date.strftime("%d/%m/%Y") %><br/>
 <strong><%= Lot.human_attribute_name(:minimum_bid)%>:</strong> R$<%= @lot.minimum_bid%><br/>
 <strong><%= Lot.human_attribute_name(:minimum_bid_difference) %>:</strong> R$<%= @lot.minimum_bid_difference %><br/>
 <% if current_user&.admin? %>

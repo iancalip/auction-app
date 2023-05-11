@@ -5,7 +5,7 @@ pt-BR:
     attributes:
       lot:
         code: "Código do lote"
-        start_date: "Data do leilão "
+        start_date: "Data do leilão"
         end_date: "Fim do leilão"
         minimum_bid: "Oferta mínima"
         minimum_bid_difference: "Lance mínimo"

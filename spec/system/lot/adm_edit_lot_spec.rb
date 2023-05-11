@@ -40,8 +40,8 @@ describe 'User log in' do
         #Assert
         expect(page).to have_content('Lote atualizado com sucesso')
         expect(page).to have_content("XYZ987654")
-        expect(page).to have_content(5.day.from_now.to_date)
-        expect(page).to have_content(10.days.from_now.to_date)
+        expect(page).to have_content("Data do leilão: #{5.day.from_now.strftime("%d/%m/%Y")}")
+        expect(page).to have_content("Fim do leilão: #{10.days.from_now.strftime("%d/%m/%Y")}")
         expect(page).to have_content('Oferta mínima: R$20.0')
         expect(page).to have_content('Lance mínimo: R$15.0')
     end

@@ -2,7 +2,9 @@ class LotsController < ApplicationController
     before_action :set_lot, only: [:show, :edit, :update, :update_status, :update_products, :assign_products]
     before_action :authenticate_admin!, only: [:create, :update, :edit, :update_status]
 
-    def show; end
+    def show
+        @products = @lot.products
+    end
 
     def new
         @lot = Lot.new

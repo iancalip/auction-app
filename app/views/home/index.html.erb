@@ -3,7 +3,7 @@
 <%= link_to 'Criar Lote', new_lot_path if current_user&.admin? %>
 
 <% if (!Lot.approved.any? && !current_user&.admin?) || (current_user&.admin? && !Lot.any?) %>
-  <p>Não existem lotes cadastrados</p>
+  <p class="text-center">Não existem lotes cadastrados</p>
 <% else %>
   <%= render 'lots_list', title: 'Aguardando Aprovação', lots: @pending_lots if current_user&.admin? %>
   <%= render 'lots_list', title: 'Lotes Disponíveis', lots: @ongoing_lots %>

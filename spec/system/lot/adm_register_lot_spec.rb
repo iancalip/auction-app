@@ -11,16 +11,6 @@ describe 'User log in' do
         expect(page).to have_link 'Criar Lote'
     end
 
-    it 'and dont see link to create lot' do
-        #Arrange
-        user = User.create!(name: 'user', cpf: '02324252481', email: 'user@email.com.br', password: 'password')
-        #Act
-        login_as(user)
-        visit root_path
-        #Assert
-        expect(page).not_to have_link 'Criar Lote'
-    end
-
     it 'and sees creation form' do
         # Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')

@@ -1,22 +1,18 @@
 require 'rails_helper'
 
-describe 'User log in' do
-    it 'and sees lot details' do
+describe 'Visitor' do
+    it 'sees lot details' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
-        user = User.create!(name: 'user', cpf: '96267093085', email: 'user@email.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.9,
                         minimum_bid_difference: 19.9, created_by_user: adm, status: :approved)
         #Act
-        login_as(user)
         visit root_path
         click_on 'Ver Detalhes'
         #Assert
         expect(current_path).to eq lot_path(lot)
         expect(page).to have_link('Leilão')
-        expect(page).to have_button('Sair')
-        expect(page).to have_content("#{user.name}")
-        expect(page).to have_content("#{user.email}")
+        expect(page).to have_link('Login')
         expect(page).to have_content('Detalhes do Lote')
         expect(page).to have_content('Código do lote: ABC123456')
         expect(page).to have_content("Data do leilão: #{1.day.from_now.strftime("%d/%m/%Y")}")
@@ -25,10 +21,9 @@ describe 'User log in' do
         expect(page).to have_content('Lance mínimo: R$19.9')
     end
 
-    it 'and see products within lot' do
+    it 'sees products within lot' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '51959723030', email: 'adm@leilaodogalpao.com.br', password: 'password')
-        user = User.create!(name: 'user', cpf: '96267093085', email: 'user@email.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: Date.current, end_date: 3.days.from_now, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
@@ -38,7 +33,6 @@ describe 'User log in' do
         product.save!
 
         #Act
-        login_as user
         visit lot_path(lot)
 
         #Arrange
@@ -49,16 +43,14 @@ describe 'User log in' do
         expect(page).to have_content('Ver Detalhes')
     end
 
-    it 'but cant see adm features' do
+    it 'cant see adm features' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
-        user = User.create!(name: 'user', cpf: '96267093085', email: 'user@email.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.90,
                         minimum_bid_difference: 19.90, created_by_user: adm, status: :approved)
         #Act
-        login_as(user)
-        visit root_path
-        click_on 'Ver Detalhes'
+        visit lot_path(lot)
+
         #Assert
         expect(page).not_to have_button('Aprovar')
         expect(page).not_to have_link('Editar')

@@ -9,8 +9,13 @@ describe 'Admin view homepage' do
         visit root_path
 
         #Assert
+        expect(page).to have_link('Leilão')
+        expect(page).to have_button('Sair')
+        expect(page).to have_content("#{adm.name}")
+        expect(page).to have_content("#{adm.email}")
         expect(page).to have_content('Leilão')
         expect(page).to have_content('Não existem lotes cadastrados')
+        expect(page).not_to have_selector("img[src$='product_iphone.jpg']")
         expect(page).not_to have_content('Lotes Disponíveis')
         expect(page).not_to have_content('Em Breve')
         expect(page).not_to have_content('Aguardando Aprovação')
@@ -22,7 +27,7 @@ describe 'Admin view homepage' do
         lot = Lot.create!(code: 'ABC123456', start_date: Date.current, end_date: 3.days.from_now, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: adm.id)
+                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
                                 filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
         product.save!
@@ -40,6 +45,7 @@ describe 'Admin view homepage' do
         expect(page).not_to have_content('Em Breve')
         expect(page).not_to have_content('Aguardando Aprovação')
         expect(page).not_to have_content('Não existem lotes cadastrados')
+        expect(page).to have_selector("img[src$='product_iphone.jpg']")
     end
 
     it 'and there is upcoming lots' do
@@ -48,7 +54,7 @@ describe 'Admin view homepage' do
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 2500.0,
                          minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: adm.id)
+                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
                                 filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
         product.save!
@@ -61,6 +67,7 @@ describe 'Admin view homepage' do
         expect(page).to have_content('ABC123456')
         expect(page).to have_content("#{1.day.from_now.to_date.strftime("%d/%m/%Y")}")
         expect(page).to have_content("#{3.days.from_now.to_date.strftime("%d/%m/%Y")}")
+        expect(page).to have_selector("img[src$='product_iphone.jpg']")
         expect(page).to have_link('Ver Detalhes')
         expect(page).to have_content('Em Breve')
         expect(page).not_to have_content('Lotes Disponíveis')
@@ -97,10 +104,12 @@ describe 'Admin view homepage' do
         expect(page).to have_content('XYZ987654')
         expect(page).to have_content("#{Date.current.strftime("%d/%m/%Y")}")
         expect(page).to have_content("#{3.days.from_now.to_date.strftime("%d/%m/%Y")}")
+        expect(page).to have_selector("img[src$='test_image.jpg']")
         expect(page).to have_content('Em Breve')
         expect(page).to have_content('ABC123456')
         expect(page).to have_content("#{1.day.from_now.to_date.strftime("%d/%m/%Y")}")
         expect(page).to have_content("#{3.days.from_now.to_date.strftime("%d/%m/%Y")}")
+        expect(page).to have_selector("img[src$='product_iphone.jpg']")
         expect(page).to have_content('Aguardando Aprovação')
         expect(page).to have_content('Lotes Disponíveis')
         expect(page).to have_content('LMN147258')
@@ -116,7 +125,7 @@ describe 'Admin view homepage' do
         lot = Lot.create!(code: 'ABC123456', start_date: Date.current, end_date: 3.days.from_now, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :pending)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: adm.id)
+                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
                                 filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
         product.save!
@@ -130,6 +139,7 @@ describe 'Admin view homepage' do
         expect(page).to have_content('ABC123456')
         expect(page).to have_content("#{Date.current.strftime("%d/%m/%Y")}")
         expect(page).to have_content("#{3.days.from_now.to_date.strftime("%d/%m/%Y")}")
+        expect(page).to have_selector("img[src$='product_iphone.jpg']")
         expect(page).to have_link('Ver Detalhes')
         expect(page).to have_content('Aguardando Aprovação')
         expect(page).not_to have_content('Lotes Disponíveis')

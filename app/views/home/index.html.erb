@@ -1,5 +1,5 @@
 
-<%= link_to 'Cadastrar Produto', new_product_path if current_user&.admin? %> |
+<%= link_to 'Cadastrar Produto' + " |", new_product_path if current_user&.admin? %>
 <%= link_to 'Criar Lote', new_lot_path if current_user&.admin? %>
 
 <% if (!Lot.approved.any? && !current_user&.admin?) || (current_user&.admin? && !Lot.any?) %>

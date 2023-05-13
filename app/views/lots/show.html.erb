@@ -17,6 +17,8 @@
     <%= link_to 'Adicionar Produto', assign_products_lot_path(@lot), class: 'btn btn-sm btn-primary' if @lot.pending?%>
 <% end %>
 
+<%= render 'bids/bidform' if @lot.ongoing? %>
+
 <div class="d-flex justify-content-center"><h3> Produtos do Lote </h3></div>
 
 <% if @lot.products.any? %>
@@ -31,4 +33,7 @@
         </div>
     <% end %>
 <% end %>
+
+
+
 

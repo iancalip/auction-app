@@ -1,0 +1,47 @@
+
+<% if @bid.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Por favor, corrija os seguintes erros:</h4>
+    <ul>
+      <% @bid.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @lot.approved? && !current_user&.admin? %>
+  <div class="d-flex justify-content-center">
+    <strong><%= Lot.human_attribute_name(:current_bid) %>:</strong>
+    <% if @lot.bids.maximum(:amount) %>
+      <%= " R$ #{@lot.bids.maximum(:amount)}" %>
+    <% else %>
+      <%= " Nenhum lance realizado" %>
+    <% end %><br/>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <strong><%= Lot.human_attribute_name(:minimum_expected_bid) %>:</strong>
+    <% if @lot.bids.maximum(:amount) %>
+      <%= " R$ #{@lot.bids.maximum(:amount) + @lot.minimum_bid_difference + 0.1}" %><br/>
+    <% else %>
+      <%= " R$ #{@lot.minimum_bid}" %><br/>
+    <% end %><br/>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-header - d-flex justify-content-center">
+      Faça uma Oferta
+    </div>
+    <div class="card-body">
+      <%= form_with(model: [@lot, @lot.bids.build], local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label :amount, "Valor do Lance" %>
+          <%= form.number_field :amount, step: 0.01, class: "form-control" %>
+        </div>
+
+        <%= form.submit "Enviar Lance", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

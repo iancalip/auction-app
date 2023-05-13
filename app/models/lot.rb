@@ -1,6 +1,7 @@
 class Lot < ApplicationRecord
 
     has_many :products
+    has_many :bids
 
     enum status: { pending: 0, approved: 4, canceled: 8 }
 
@@ -14,7 +15,14 @@ class Lot < ApplicationRecord
     validate :check_date
     validate :check_admin, on: :update
 
-    private
+
+    def highest_bid
+        bids.order(amount: :desc).first
+    end
+
+    def ongoing?
+        start_date <= Date.current && end_date >= Date.current
+    end
 
     def check_admin
         if status_changed?(from: "pending", to: "approved") && (created_by_user_id == approved_by_user_id)

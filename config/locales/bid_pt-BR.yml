@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      bid: Lance
+    attributes:
+      bid:
+        amount: "Valor"
+      lot:
+        current_bid: "Oferta Atual"
+        minimum_expected_bid: "Lance Mínimo Esperado"

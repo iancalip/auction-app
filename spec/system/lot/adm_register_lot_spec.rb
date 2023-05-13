@@ -20,11 +20,11 @@ describe 'User log in' do
         click_on 'Criar Lote'
 
         # Assert
-        expect(page).to have_field('Código')
-        expect(page).to have_field('Data do leilão')
-        expect(page).to have_field('Fim do leilão')
-        expect(page).to have_field('Oferta mínima')
-        expect(page).to have_field('Lance mínimo')
+        expect(page).to have_field('Código do Lote')
+        expect(page).to have_field('Início do Leilão')
+        expect(page).to have_field('Fim do Leilão')
+        expect(page).to have_field('Oferta Mínima Inicial')
+        expect(page).to have_field('Diferença Mínima para Lance')
     end
 
     it 'creates lot and see details' do
@@ -34,11 +34,11 @@ describe 'User log in' do
         login_as adm
         visit root_path
         click_on 'Criar Lote'
-        fill_in 'Código', with: 'ABC123456'
-        fill_in 'Data do leilão', with: 5.days.from_now.to_date
-        fill_in 'Fim do leilão', with: 10.days.from_now.to_date
-        fill_in 'Oferta mínima', with: 20
-        fill_in 'Lance mínimo', with: 15
+        fill_in 'Código do Lote', with: 'ABC123456'
+        fill_in 'Início do Leilão', with: 5.days.from_now.to_date
+        fill_in 'Fim do Leilão', with: 10.days.from_now.to_date
+        fill_in 'Oferta Mínima Inicial', with: 20
+        fill_in 'Diferença Mínima para Lance', with: 15
         click_on 'Enviar'
 
         # Assert
@@ -47,11 +47,11 @@ describe 'User log in' do
         expect(page).not_to have_button('Aprovar')
         expect(page).to have_button('Cancelar')
         expect(page).to have_content('Lote criado com sucesso')
-        expect(page).to have_content('Código do lote: ABC123456')
-        expect(page).to have_content("Data do leilão: #{5.day.from_now.strftime("%d/%m/%Y")}")
-        expect(page).to have_content("Fim do leilão: #{10.days.from_now.strftime("%d/%m/%Y")}")
-        expect(page).to have_content('Oferta mínima: R$20.0 ')
-        expect(page).to have_content('Lance mínimo: R$15.0')
+        expect(page).to have_content('Código do Lote: ABC123456')
+        expect(page).to have_content("Início do Leilão: #{5.day.from_now.strftime("%d/%m/%Y")}")
+        expect(page).to have_content("Fim do Leilão: #{10.days.from_now.strftime("%d/%m/%Y")}")
+        expect(page).to have_content('Oferta Mínima Inicial: R$20.0 ')
+        expect(page).to have_content('Diferença Mínima para Lance: R$15.0')
         expect(page).to have_link('Adicionar Produto')
     end
 
@@ -62,19 +62,19 @@ describe 'User log in' do
         login_as adm
         visit root_path
         click_on 'Criar Lote'
-        fill_in 'Código', with: ''
-        fill_in 'Data do leilão', with: nil
-        fill_in 'Fim do leilão', with: nil
-        fill_in 'Oferta mínima', with: nil
-        fill_in 'Lance mínimo', with: nil
+        fill_in 'Código do Lote', with: ''
+        fill_in 'Início do Leilão', with: nil
+        fill_in 'Fim do Leilão', with: nil
+        fill_in 'Oferta Mínima Inicial', with: nil
+        fill_in 'Diferença Mínima para Lance', with: nil
         click_on 'Enviar'
 
         # Assert
-        expect(page).to have_content('Código do lote não pode ficar em branco')
-        expect(page).to have_content('Código do lote deve ter 3 letras maiúsculas seguidas de 6 números')
-        expect(page).to have_content('Data do leilão não pode ficar em branco')
-        expect(page).to have_content('Fim do leilão não pode ficar em branco')
-        expect(page).to have_content('Oferta mínima não pode ficar em branco')
-        expect(page).to have_content('Lance mínimo não pode ficar em branco')
+        expect(page).to have_content('Código do Lote não pode ficar em branco')
+        expect(page).to have_content('Código do Lote deve ter 3 letras maiúsculas seguidas de 6 números')
+        expect(page).to have_content('Início do Leilão não pode ficar em branco')
+        expect(page).to have_content('Fim do Leilão não pode ficar em branco')
+        expect(page).to have_content('Oferta Mínima Inicial não pode ficar em branco')
+        expect(page).to have_content('Diferença Mínima para Lance não pode ficar em branco')
     end
 end

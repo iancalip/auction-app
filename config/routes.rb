@@ -8,5 +8,6 @@ Rails.application.routes.draw do
       get :assign_products
       post :update_products
     end
+    resources :bids, only: [:create]
   end
 end

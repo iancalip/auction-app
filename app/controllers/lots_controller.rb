@@ -3,7 +3,9 @@ class LotsController < ApplicationController
     before_action :authenticate_admin!, only: [:create, :update, :edit, :update_status]
 
     def show
+        return redirect_to root_path, notice: "Lote indisponível" if @lot.pending? && !current_user&.admin?
         @products = @lot.products
+        @bid = Bid.new
     end
 
     def new

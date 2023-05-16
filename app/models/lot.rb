@@ -3,7 +3,7 @@ class Lot < ApplicationRecord
     has_many :products
     has_many :bids
 
-    enum status: { pending: 0, approved: 4, canceled: 8 }
+    enum status: { pending: 0, approved: 4, closed: 6, canceled: 8 }
 
     belongs_to :created_by_user, class_name: 'User'
     belongs_to :approved_by_user, class_name: 'User', optional: true
@@ -32,11 +32,7 @@ class Lot < ApplicationRecord
 
     def check_date
         if start_date.present? && end_date.present?
-            if start_date >= end_date
-                errors.add(:end_date, 'deve ser futura à data de criação')
-            elsif start_date < Date.today || end_date < Date.today
-                errors.add(:start_date, 'deve ser uma data futura')
-            end
+            return errors.add(:end_date, 'deve ser futura à data de criação') if start_date >= end_date
         end
     end
 end

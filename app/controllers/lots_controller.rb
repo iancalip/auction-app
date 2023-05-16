@@ -1,6 +1,6 @@
 class LotsController < ApplicationController
-    before_action :set_lot, only: [:show, :edit, :update, :update_status, :update_products, :assign_products]
-    before_action :authenticate_admin!, only: [:create, :update, :edit, :update_status]
+    before_action :set_lot, only: [:show, :edit, :update, :update_products, :assign_products, :approve_status, :cancel_status, :close_status]
+    before_action :authenticate_admin!, only: [:create, :update, :edit, :approve_status, :cancel_status, :close_statuse]
 
     def show
         return redirect_to root_path, notice: "Lote indisponível" if @lot.pending? && !current_user&.admin?
@@ -39,14 +39,29 @@ class LotsController < ApplicationController
         end
     end
 
-    def update_status
+    def approve_status
         if current_user.id != @lot.created_by_user_id &&  @lot.pending?
             @lot.approved! && @lot.update(approved_by_user_id: current_user.id)
-            redirect_to @lot; flash[:notice] =  "Lote aprovado com sucesso!"
+            redirect_to @lot, notice: 'Lote aprovado com sucesso!'
         else
-            redirect_to @lot; flash[:notice] = "Você não tem permissão para isso"
+            redirect_to @lot, notice: 'Você não tem permissão para isso'
         end
     end
+
+    def cancel_status
+        @lot.canceled!
+        redirect_to expired_lots_lots_path, notice: 'Lote cancelado com sucesso!'
+    end
+
+    def close_status
+        @lot.closed!
+        redirect_to expired_lots_lots_path, notice: 'Lote encerrado com sucesso!'
+    end
+
+    def expired_lots
+        @lots = Lot.where('end_date < ?', Date.current)
+    end
+
 
     #criar outro update_status para botao de cancelar, depois de cobrir as funcionalidades obrigatórias da app
 

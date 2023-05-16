@@ -35,17 +35,7 @@ RSpec.describe Lot, type: :model do
             expect(lot.errors[:code]).to include('deve ter 3 letras maiúsculas seguidas de 6 números')
         end
 
-        it 'invalid when start date is not in the future' do
-            #Arrange
-            adm = User.create!(name: 'Adm', cpf: '12213531447', email: 'adm@leilaodogalpao.com.br', password: 'password')
-            lot = Lot.new(code: 'ABC123456', start_date: 2.day.ago, end_date: 3.days.from_now, minimum_bid: 49.90,
-                            minimum_bid_difference: 19.90, created_by_user: adm)
-            #Assert
-            expect(lot).not_to be_valid
-            expect(lot.errors[:start_date]).to include('deve ser uma data futura')
-        end
-
-        it 'invalid when end date is not in the future' do
+        it 'invalid when end date is before start date' do
             #Arrange
             adm = User.create!(name: 'Adm', cpf: '12213531447', email: 'adm@leilaodogalpao.com.br', password: 'password')
             lot = Lot.new(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.ago, minimum_bid: 49.90,

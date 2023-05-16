@@ -1,6 +1,9 @@
 
-<%= link_to 'Cadastrar Produto' + " |", new_product_path if current_user&.admin? %>
-<%= link_to 'Criar Lote', new_lot_path if current_user&.admin? %>
+<% if current_user&.admin? %>
+  <%= link_to 'Cadastrar Produto' + " |", new_product_path %>
+  <%= link_to 'Criar Lote', new_lot_path %>
+  <%= link_to 'Lotes Expirados', expired_lots_lots_path %>
+<% end %>
 
 <% if (!Lot.approved.any? && !current_user&.admin?) || (current_user&.admin? && !Lot.any?) %>
   <p class="text-center">Não existem lotes cadastrados</p>

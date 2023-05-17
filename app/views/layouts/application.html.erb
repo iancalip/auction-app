@@ -12,19 +12,50 @@
 
   <body>
     <header>
-      <nav class="navbar bg-dark" data-bs-theme="dark">
-        <h1><%= link_to 'Leilão', root_path, class: "nome-da-classe m-4" %> </h1>
-        <% if user_signed_in? %>
-          <%= link_to 'Meus Lotes', lots_path %>
-          <div class="text-white">
-          <%= current_user.name %> | <%= current_user.email %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="<%= root_path %>">Leilão</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item text-white mt-2">
+                  <%= current_user.name %> | <%= current_user.email %>
+                </li>
+                <li class="nav-item">
+                  <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: "btn btn-link" %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to 'Login', new_user_session_path, class: "btn btn-link" %>
+                </li>
+              <% end %>
+            </ul>
+
+            <form class="d-flex ms-auto" action="/search" method="get">
+              <%= text_field_tag :q, nil, placeholder: "Pesquisar produtos e lotes...", class: "form-control me-2" %>
+              <%= button_tag type: 'submit', class: "btn btn-primary btn-sm" do %>
+                Pesquisar
+              <% end %>
+            </form>
           </div>
-          <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: "btn btn-link m-4" %>
-        <% else %>
-          <%= link_to 'Login', new_user_session_path, class: "btn btn-link m-4" %>
-        <% end %>
+        </div>
       </nav>
     </header>
+
+    <div class="m-2">
+      <%= link_to 'Produtos', products_path %>
+      <% if user_signed_in? %>
+        | <%= link_to 'Meus Lotes', lots_path if user_signed_in? %>
+      <% end %>
+      <% if current_user&.admin? %>
+        | <%= link_to 'Cadastrar Produto', new_product_path %> |
+        <%= link_to 'Criar Lote', new_lot_path %> |
+        <%= link_to 'Lotes Expirados', expired_lots_path %>
+      <% end %>
+    </div>
     <main class='m-4'>
       <% if alert.present? || notice.present? %>
         <div class="alert alert-danger">
@@ -36,3 +67,4 @@
     </main>
   </body>
 </html>
+

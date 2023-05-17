@@ -7,17 +7,17 @@ describe 'User sign up' do
         visit root_path
         click_on 'Login'
         click_on 'Sign up'
-        within('form') do
-            fill_in 'Nome', with: 'Teste'
-            fill_in 'E-mail', with: 'teste@email.com'
-            fill_in 'Senha', with: 'password'
-            fill_in 'CPF', with: '02324252481'
-            fill_in 'Confirme sua senha', with: 'password'
-        end
+        fill_in 'Nome', with: 'Teste'
+        fill_in 'E-mail', with: 'teste@email.com'
+        fill_in 'Senha', with: 'password'
+        fill_in 'CPF', with: '02324252481'
+        fill_in 'Confirme sua senha', with: 'password'
         click_on 'Sign up'
 
         #Assert
         expect(page).to have_button 'Sair'
+        expect(page).to have_link 'Produtos'
+        expect(page).to have_link 'Meus Lotes'
         expect(page).to have_content 'teste@email.com'
         expect(page).to have_content 'Usuário cadastrado com sucesso'
         expect(User.last.name).to eq 'Teste'

@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Detalhes do Produto</h2>
+
+ <div class="d-flex justify-content-center mb-5" ><%= image_tag(@product.image, class: "img-thumbnail") %></div>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong><%= Product.human_attribute_name(:name) %>:</strong> <%= @product.name %>
+    </li>
+    <li class="list-group-item">
+      <strong><%= Product.human_attribute_name(:weight) %>:</strong> <%= @product.weight %> g
+    </li>
+    <li class="list-group-item">
+      <strong><%= Product.human_attribute_name(:width) %>:</strong> <%= @product.width %> cm
+    </li>
+    <li class="list-group-item">
+      <strong><%= Product.human_attribute_name(:height) %>:</strong> <%= @product.height %> cm
+    </li>
+    <li class="list-group-item">
+      <strong><%= Product.human_attribute_name(:depth) %>:</strong> <%= @product.depth %> cm
+    </li>
+    <li class="list-group-item">
+      <strong><%= Product.human_attribute_name(:category) %>:</strong> <%= @product.category %>
+    </li>
+    <li class="list-group-item">
+      <strong><%= Product.human_attribute_name(:description) %>:</strong> <%= @product.description %>
+    </li>
+    <% if @product.lot_id && @product.lot.approved? %>
+    <li class="list-group-item">
+      <strong>Atualmente no Lote: </strong> <%= link_to @product.lot.code, lot_path(@product.lot_id) %>
+    </li>
+    <% end %>
+  </ul>
+</div>
+
+<% if current_user&.admin? %>
+    <div>
+        <%= link_to 'Editar', edit_product_path, class: "btn btn-sm btn-primary m-4" %>
+    </div>
+<% end %>

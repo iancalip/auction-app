@@ -4,16 +4,16 @@ describe 'ADM logs in' do
     it 'and sees link to register product' do
         #Arrange
         User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
+
         #Act
         visit root_path
         within('nav') do
             click_on 'Login'
         end
-        within('form') do
-            fill_in 'E-mail', with: 'adm@leilaodogalpao.com.br'
-            fill_in 'Senha', with: 'password'
-            click_on 'Log in'
-        end
+        fill_in 'E-mail', with: 'adm@leilaodogalpao.com.br'
+        fill_in 'Senha', with: 'password'
+        click_on 'Log in'
+
         #Assert
         within('nav') do
             expect(page).not_to have_link 'Login'

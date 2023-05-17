@@ -5,7 +5,7 @@
   <ul>
     <% @products.each do |product| %>
       <li>
-        <%= form.check_box :product_ids, { multiple: true, id: "product_#{product.id}" }, product.id, nil %>
+        <%= form.check_box :product_ids, { multiple: true, id: "product_#{product.id}", checked: product.lot == @lot }, product.id, nil %>
         <%= form.label product.name %>
       </li>
     <% end %>

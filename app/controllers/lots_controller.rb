@@ -69,13 +69,14 @@ class LotsController < ApplicationController
     end
 
     def assign_products
-        @products = Product.where(lot_id: nil)
+        @products = Product.where('lot_id IS NULL OR lot_id = ?', @lot.id)
     end
 
     def update_products
-        product_ids = params[:product_ids].map(&:to_i)
+        product_ids = params[:product_ids]&.map(&:to_i)
+        @lot.products.where.not(id: product_ids).update_all(lot_id: nil)
         Product.where(id: product_ids).update_all(lot_id: @lot.id)
-        redirect_to lot_path(@lot), notice: 'Produtos vinculados ao lote com sucesso!'
+        redirect_to lot_path(@lot), notice: 'Lote atualizado com sucesso!'
     end
 
     private

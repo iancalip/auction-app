@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário se autentica' do
-    it 'com sucesso' do
+describe 'User sign in' do
+    it 'successfully' do
         #Arrange
         User.create!(name: 'Teste', cpf: '02324252481', email: 'teste@email.com', password: 'password')
         #Act
@@ -17,6 +17,7 @@ describe 'Usuário se autentica' do
         #Assert
         within('nav') do
             expect(page).not_to have_link 'Login'
+            expect(page).to have_link 'Meus Lotes'
             expect(page).to have_button 'Sair'
             expect(page).to have_content 'Teste | teste@email.com'
         end
@@ -25,7 +26,7 @@ describe 'Usuário se autentica' do
         expect(page).not_to have_link 'Criar Lote'
     end
 
-    it 'faz logout' do
+    it 'and logs out' do
         #Arrange
         user = User.create!(name: 'Teste', cpf: '02324252481', email: 'teste@email.com', password: 'password')
         #Act

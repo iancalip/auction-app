@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'ADM faz login' do
-    it 'e vê link Cadastrar produto' do
+describe 'ADM logs in' do
+    it 'and sees link to register product' do
         #Arrange
         User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
@@ -24,7 +24,7 @@ describe 'ADM faz login' do
         expect(page).to have_link 'Cadastrar Produto'
     end
 
-    it 'e vê página de cadastro de produto' do
+    it 'and sees register product form' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
@@ -42,7 +42,7 @@ describe 'ADM faz login' do
         expect(page).to have_field('image', type: 'file')
     end
 
-    it 'cadastra produto e volta pra tela inicial' do
+    it 'register product and visits homepage' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
@@ -64,7 +64,7 @@ describe 'ADM faz login' do
        expect(current_path).to eq root_path
     end
 
-    it 'mas deixa campos obrigatórios em branco ao cadastrar produto' do
+    it 'but didnt filled all the fields' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act
@@ -94,7 +94,7 @@ describe 'ADM faz login' do
         expect(current_path).to eq products_path
     end
 
-    it 'mas não preenche com os formatos de dados corretos ao cadastrar produto' do
+    it 'but didnt filled the fields with the correct info' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act

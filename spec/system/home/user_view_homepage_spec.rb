@@ -14,6 +14,7 @@ describe 'User visit homepage' do
         expect(page).to have_content("#{user.email}")
         expect(page).not_to have_link('Sair')
         expect(page).not_to have_link('Criar Lote')
+        expect(page).not_to have_link('Lotes Expirados')
         expect(page).not_to have_link('Cadastrar Produto')
     end
 

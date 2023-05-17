@@ -16,6 +16,7 @@ describe 'Visitor visits homepage' do
         expect(page).not_to have_content('Em Breve')
         expect(page).not_to have_content('Aguardando Aprovação')
         expect(page).not_to have_link('Criar Lote')
+        expect(page).not_to have_link('Lotes Expirados')
         expect(page).not_to have_link('Cadastrar Produto')
     end
 

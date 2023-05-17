@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class='m-4'>
+<html>
   <head>
     <title>AuctionApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,22 +12,26 @@
 
   <body>
     <header>
-      <h1><%= link_to 'Leilão', root_path %> </h1>
-      <nav>
+      <nav class="navbar bg-dark" data-bs-theme="dark">
+        <h1><%= link_to 'Leilão', root_path, class: "nome-da-classe m-4" %> </h1>
         <% if user_signed_in? %>
+          <%= link_to 'Meus Lotes', lots_path %>
+          <div class="text-white">
           <%= current_user.name %> | <%= current_user.email %>
-          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+          </div>
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: "btn btn-link m-4" %>
         <% else %>
-          <%= link_to 'Login', new_user_session_path %>
+          <%= link_to 'Login', new_user_session_path, class: "btn btn-link m-4" %>
         <% end %>
-        <hr>
       </nav>
     </header>
-    <main>
-      <div>
-        <%= alert %>
-        <%= notice %>
-      </div>
+    <main class='m-4'>
+      <% if alert.present? || notice.present? %>
+        <div class="alert alert-danger">
+          <%= alert %>
+          <%= notice %>
+        </div>
+      <% end %>
       <%= yield %>
     </main>
   </body>

@@ -1,6 +1,11 @@
 class LotsController < ApplicationController
     before_action :set_lot, only: [:show, :edit, :update, :update_products, :assign_products, :approve_status, :cancel_status, :close_status]
-    before_action :authenticate_admin!, only: [:create, :update, :edit, :approve_status, :cancel_status, :close_statuse]
+    before_action :authenticate_admin!, only: [:create, :update, :edit, :approve_status, :cancel_status, :close_status, :expired]
+    before_action :authenticate_user!, only: [:index]
+
+    def index
+        @lots = Lot.joins(:bids).where(bids: { user_id: current_user.id }).distinct
+    end
 
     def show
         return redirect_to root_path, notice: "Lote indisponível" if @lot.pending? && !current_user&.admin?
@@ -40,7 +45,7 @@ class LotsController < ApplicationController
     end
 
     def approve_status
-        if current_user.id != @lot.created_by_user_id &&  @lot.pending?
+        if @lot.products.any? && current_user.id != @lot.created_by_user_id &&  @lot.pending?
             @lot.approved! && @lot.update(approved_by_user_id: current_user.id)
             redirect_to @lot, notice: 'Lote aprovado com sucesso!'
         else
@@ -50,20 +55,18 @@ class LotsController < ApplicationController
 
     def cancel_status
         @lot.canceled!
-        redirect_to expired_lots_lots_path, notice: 'Lote cancelado com sucesso!'
+        @lot.products.update(lot_id: nil)
+        redirect_to expired_lots_path, notice: 'Lote cancelado com sucesso!'
     end
 
     def close_status
         @lot.closed!
-        redirect_to expired_lots_lots_path, notice: 'Lote encerrado com sucesso!'
+        redirect_to expired_lots_path, notice: 'Lote encerrado com sucesso!'
     end
 
-    def expired_lots
-        @lots = Lot.where('end_date < ?', Date.current)
+    def expired
+        @lots = Lot.where('end_date < ? OR status = ?', Date.current, 8)
     end
-
-
-    #criar outro update_status para botao de cancelar, depois de cobrir as funcionalidades obrigatórias da app
 
     def assign_products
         @products = Product.where(lot_id: nil)
@@ -79,7 +82,7 @@ class LotsController < ApplicationController
 
     def authenticate_admin!
         unless current_user&.admin?
-            redirect_to root_path, alert: 'Apenas administradores podem criar lotes.'
+            redirect_to root_path, alert: 'Apenas administradores podem executar essa ação.'
         end
     end
 

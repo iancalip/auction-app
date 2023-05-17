@@ -1,25 +1,30 @@
-<div class="d-flex justify-content-center"><h2> Detalhes do Lote </h2></div>
+<div class="d-flex justify-content-center mb-4"><h2> Detalhes do Lote </h2></div>
 
-<strong><%= Lot.human_attribute_name(:code) %>:</strong> <%= @lot.code %><br/>
-<strong><%= Lot.human_attribute_name(:start_date)%>:</strong> <%= @lot.start_date.strftime("%d/%m/%Y") %><br/>
-<strong><%= Lot.human_attribute_name(:end_date) %>:</strong> <%= @lot.end_date.strftime("%d/%m/%Y") %><br/>
-<strong><%= Lot.human_attribute_name(:minimum_bid)%>:</strong> R$<%= @lot.minimum_bid%><br/>
-<strong><%= Lot.human_attribute_name(:minimum_bid_difference) %>:</strong> R$<%= @lot.minimum_bid_difference %><br/>
+<ul class="list-group">
+  <li class="list-group-item"><strong><%= Lot.human_attribute_name(:code) %>:</strong> <%= @lot.code %></li>
+  <li class="list-group-item"><strong><%= Lot.human_attribute_name(:start_date)%>:</strong> <%= @lot.start_date.strftime("%d/%m/%Y") %></li>
+  <li class="list-group-item"><strong><%= Lot.human_attribute_name(:end_date) %>:</strong> <%= @lot.end_date.strftime("%d/%m/%Y") %></li>
+  <li class="list-group-item"><strong><%= Lot.human_attribute_name(:minimum_bid)%>:</strong> R$<%= @lot.minimum_bid%></li>
+  <li class="list-group-item"><strong><%= Lot.human_attribute_name(:minimum_bid_difference) %>:</strong> R$<%= @lot.minimum_bid_difference %></li>
+
+  <% if current_user&.admin? %>
+    <li class="list-group-item"><strong><%= Lot.human_attribute_name(:status) %>:</strong> <%= t(@lot.status, scope: 'activerecord.enums.lot.status') %></li>
+  <% end %>
+</ul>
 
 <% if current_user&.admin? %>
-    <strong><%= Lot.human_attribute_name(:status) %>:</strong> <%= t(@lot.status, scope: 'activerecord.enums.lot.status') %><br/>
-<% end %>
-
-<% if current_user&.admin? %>
-    <%= link_to 'Editar', edit_lot_path %><br/>
-    <%= button_to "Aprovar", approve_status_lot_path(@lot), method: :patch, data: { confirm: "Tem certeza que deseja aprovar o lote?" }, class: "btn btn-success btn-sm" if @lot.pending? && current_user.id != @lot.created_by_user_id %>
-    <%= button_to "Cancelar", cancel_status_lot_path(@lot), method: :patch, data: { confirm: "Tem certeza que deseja cancelar o lote?" }, class: "btn btn-danger btn-sm" unless @lot.canceled? %>
+  <div class="d-flex mt-4 justify-content-start">
+    <%= link_to 'Editar', edit_lot_path, class: "btn btn-sm btn-primary me-3" %>
+    <%= button_to "Aprovar", approve_status_lot_path(@lot), method: :patch, data: { confirm: "Tem certeza que deseja aprovar o lote?" }, class: "btn btn-success btn-sm me-3" if @lot.pending? && current_user.id != @lot.created_by_user_id %>
+    <%= button_to "Cancelar", cancel_status_lot_path(@lot), method: :patch, data: { confirm: "Tem certeza que deseja cancelar o lote?" }, class: "btn btn-danger btn-sm me-3" unless @lot.canceled? %>
     <%= link_to 'Adicionar Produto', assign_products_lot_path(@lot), class: 'btn btn-sm btn-primary' if @lot.pending?%>
+  </div>
 <% end %>
+
 
 <%= render 'bids/bidform' if @lot.ongoing? %>
 
-<div class="d-flex justify-content-center"><h3> Produtos do Lote </h3></div>
+<div class="d-flex justify-content-center mt-4"><h3> Produtos do Lote </h3></div>
 
 <% if @lot.products.any? %>
     <% @products.each do |product| %>

@@ -35,4 +35,8 @@ class Lot < ApplicationRecord
             return errors.add(:end_date, 'deve ser futura à data de criação') if start_date >= end_date
         end
     end
+
+    def winner(current_user)
+        highest_bid.user == current_user
+    end
 end

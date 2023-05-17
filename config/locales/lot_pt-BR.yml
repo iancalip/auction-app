@@ -18,3 +18,4 @@ pt-BR:
           pending: "Aguardando Aprovação"
           approved: "Aprovado"
           canceled: "Cancelado"
+          closed: "Encerrado"

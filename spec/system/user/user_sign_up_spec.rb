@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário se autentica' do
-    it 'com sucesso' do
+describe 'User sign up' do
+    it 'successfully' do
         #Arrange
         #Act
         visit root_path
@@ -23,7 +23,7 @@ describe 'Usuário se autentica' do
         expect(User.last.name).to eq 'Teste'
     end
 
-    it 'sem sucesso, dados indisponiveis' do
+    it 'and fails because of unavailable info' do
         #Arrange
         User.create!(name: 'Teste', cpf: '02324252481', email: 'teste@email.com', password: 'password')
         #Act
@@ -43,7 +43,7 @@ describe 'Usuário se autentica' do
         expect(page).to have_content 'E-mail já está em uso'
     end
 
-    it 'sem sucesso, senha inválida' do
+    it 'and fails because of invalid password' do
         #Arrange
         #Act
         visit root_path

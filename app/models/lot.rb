@@ -24,6 +24,10 @@ class Lot < ApplicationRecord
         start_date <= Date.current && end_date >= Date.current
     end
 
+    def check_approval(current_user)
+        products.any? && current_user.id != created_by_user_id &&  pending? && start_date > Date.current
+    end
+
     def check_admin
         if status_changed?(from: "pending", to: "approved") && (created_by_user_id == approved_by_user_id)
             errors.add(:approved_by_user_id, 'não pode ser o mesmo usuário que criou o lote')

@@ -4,7 +4,7 @@ class HomeController < ApplicationController
         @upcoming_lots = approved_lots.select { |lot| lot.start_date > Date.current }
 
         if current_user&.admin?
-            @pending_lots = Lot.pending.order(start_date: :asc, end_date: :asc)
+            @pending_lots = Lot.pending.where('end_date > ?', Date.current).order(start_date: :asc, end_date: :asc)
         end
     end
 

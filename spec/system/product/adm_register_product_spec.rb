@@ -57,7 +57,7 @@ describe 'ADM logs in' do
         fill_in 'Profundidade', with: 10
         fill_in 'Categoria', with: 'Categoria'
         fill_in 'Descrição', with: 'Descrição'
-        attach_file('image', Rails.root.join('spec/support/test_image.jpg'))
+        attach_file('image', Rails.root.join('spec/support/Cadeira_Gamer.jpg'))
         click_on 'Enviar'
         #Assert
        expect(page).to have_content('Produto cadastrado com sucesso')
@@ -109,7 +109,7 @@ describe 'ADM logs in' do
         fill_in 'Profundidade', with: 'a'
         fill_in 'Categoria', with: 'Categoria'
         fill_in 'Descrição', with: 'Descrição'
-        attach_file('image', Rails.root.join('spec/support/test_image.jpg'))
+        attach_file('image', Rails.root.join('spec/support/Cadeira_Gamer.jpg'))
         click_on 'Enviar'
 
         #Assert

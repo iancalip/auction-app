@@ -1,28 +1,12 @@
+<h2 class="d-flex justify-content-center m-4">Lotes Expirados:</h2>
+<%= render partial: 'list', locals: { lots: @approved_lots } %>
 
-<div class="list-group">
-  <% @lots.each do |lot| %>
-    <div class="list-group-item">
-        <h4 class="list-group-item-heading">Lote: <%= lot.code %></h4>
-        <p class="list-group-item-text">Duração: <%= lot.start_date.strftime("%d/%m/%Y")%> - <%= lot.end_date.strftime("%d/%m/%Y")%></p>
-        <p class="list-group-item-text">Maior Lance:
-            <% if lot.bids.maximum(:amount) %>
-                <%= " R$ #{lot.bids.maximum(:amount)}" %>
-            <% else %>
-                <%= " Nenhum lance realizado" %>
-            <% end %></p>
-        <p class="list-group-item-text">Vencedor(a):
-            <% if lot.bids.any? %>
-                <% max_bid = lot.bids.order(amount: :desc).first %>
-                <%= max_bid.user.email %>
-            <% else %>
-                <%= " Não houveram vencedores" %>
-            <% end %></p>
-        <p class="list-group-item-text"><%= Lot.human_attribute_name(:status)%>: <%= t(lot.status, scope: 'activerecord.enums.lot.status') %></p>
-      <% if lot.bids.any? %>
-        <%= button_to "Encerrar", close_status_lot_path(lot), method: :patch, data: { confirm: "Tem certeza que deseja encerrar o lote?" }, class: "btn btn-danger btn-sm" unless lot.closed? %>
-      <% else %>
-        <%= button_to "Cancelar", cancel_status_lot_path(lot), method: :patch, data: { confirm: "Tem certeza que deseja cancelar o lote?" }, class: "btn btn-danger btn-sm" unless lot.canceled? %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+<h2 class="d-flex justify-content-center m-4">Lotes Pendentes Aguardando Cancelamento:</h2>
+<%= render partial: 'list', locals: { lots: @pending_lots } %>
+
+<h2 class="d-flex justify-content-center m-4">Lotes Encerrados:</h2>
+<%= render partial: 'list', locals: { lots: @closed_lots } %>
+
+<h2 class="d-flex justify-content-center m-4">Lotes Cancelados:</h2>
+<%= render partial: 'list', locals: { lots: @canceled_lots } %>
+

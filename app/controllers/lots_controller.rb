@@ -45,7 +45,7 @@ class LotsController < ApplicationController
     end
 
     def approve_status
-        if @lot.products.any? && current_user.id != @lot.created_by_user_id &&  @lot.pending?
+        if @lot.check_approval(current_user)
             @lot.approved! && @lot.update(approved_by_user_id: current_user.id)
             redirect_to @lot, notice: 'Lote aprovado com sucesso!'
         else
@@ -64,9 +64,14 @@ class LotsController < ApplicationController
         redirect_to expired_lots_path, notice: 'Lote encerrado com sucesso!'
     end
 
+
     def expired
-        @lots = Lot.where('end_date < ? OR status = ?', Date.current, 8)
+        @approved_lots = Lot.where('end_date < ? AND status = ?', Date.current, 4)
+        @pending_lots = Lot.where('end_date < ? AND status = ?', Date.current, 6)
+        @closed_lots = Lot.where(status: 6)
+        @canceled_lots = Lot.where(status: 8)
     end
+
 
     def assign_products
         @products = Product.where('lot_id IS NULL OR lot_id = ?', @lot.id)

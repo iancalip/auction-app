@@ -6,8 +6,8 @@ describe 'Adm adds product' do
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
                                 category: 'categoria', description: 'celular caro')
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 2500.0,
                             minimum_bid_difference: 70.0, created_by_user: adm)
@@ -43,12 +43,12 @@ describe 'Adm adds product' do
                                 minimum_bid_difference: 20, created_by_user: adm)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
                                 category: 'categoria', description: 'celular caro', lot_id: lot.id)
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         other_product = Product.new(name: 'Produto', weight: 8000 , width: 70, height: 45, depth: 20,
                                     category: 'categoria', description: 'descrição')
-        other_product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                                    filename: 'test_image.jpg', content_type: 'image/jpeg')
+        other_product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                                    filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
         product.save!
         other_product.save!
         #Act
@@ -66,13 +66,13 @@ describe 'Adm adds product' do
     it 'to another adms lot and sees approve button' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
-        other_adm = User.create!(name: 'adm2', cpf: '86160256505', email: 'adm2@leilaodogalpao.com.br', password: 'password')
+        other_adm = User.create!(name: 'adm2', cpf: '64725165026', email: 'adm2@leilaodogalpao.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: other_adm)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
                                 category: 'categoria', description: 'celular caro', lot_id: nil)
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
 
         #Act
@@ -99,13 +99,13 @@ describe 'Adm adds product' do
     it 'to another adms lot and sees approve button' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
-        other_adm = User.create!(name: 'adm2', cpf: '86160256505', email: 'adm2@leilaodogalpao.com.br', password: 'password')
+        other_adm = User.create!(name: 'adm2', cpf: '64725165026', email: 'adm2@leilaodogalpao.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: other_adm)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
                                 category: 'categoria', description: 'celular caro', lot_id: nil)
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
 
         #Act
@@ -132,7 +132,7 @@ describe 'Adm adds product' do
     it 'but cant add product or approve on an already approved lot' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
-        other_adm = User.create!(name: 'adm2', cpf: '86160256505', email: 'adm2@leilaodogalpao.com.br', password: 'password')
+        other_adm = User.create!(name: 'adm2', cpf: '64725165026', email: 'adm2@leilaodogalpao.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.90,
                         minimum_bid_difference: 19.90, created_by_user: other_adm, approved_by_user: adm, status: :approved)
         #Act

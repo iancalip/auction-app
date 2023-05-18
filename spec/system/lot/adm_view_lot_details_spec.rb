@@ -4,7 +4,7 @@ describe 'Adm logs in' do
     it 'and sees lot details' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
-        other_adm = User.create!(name: 'adm2', cpf: '86160256505', email: 'adm2@leilaodogalpao.com.br', password: 'password')
+        other_adm = User.create!(name: 'adm2', cpf: '64725165026', email: 'adm2@leilaodogalpao.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.9,
                         minimum_bid_difference: 19.9, created_by_user: other_adm)
         #Act
@@ -38,8 +38,8 @@ describe 'Adm logs in' do
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
                                 category: 'categoria', description: 'celular caro', lot_id: lot.id)
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
 
         #Act
@@ -50,7 +50,7 @@ describe 'Adm logs in' do
         expect(page).to have_content('Produtos do Lote')
         expect(page).to have_content('Iphone')
         expect(page).to have_content("#{product.description}")
-        expect(page).to have_selector("img[src$='product_iphone.jpg']")
+        expect(page).to have_selector("img[src$='Iphone.jpg']")
         expect(page).to have_content('Ver Detalhes')
     end
 

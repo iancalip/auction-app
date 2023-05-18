@@ -11,8 +11,8 @@ RSpec.describe Bid, type: :model do
                             minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
             product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
                                 category: 'categoria', description: 'celular caro', lot_id: lot.id)
-            product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+            product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
             product.save!
             bid = Bid.new(lot_id: lot.id, user_id: user.id, amount: 300.0)
             #Assert
@@ -28,8 +28,8 @@ RSpec.describe Bid, type: :model do
                             minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
             product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
                                 category: 'categoria', description: 'celular caro', lot_id: lot.id)
-            product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+            product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
             product.save!
             bid = Bid.new(lot_id: lot.id, user_id: user.id, amount: nil)
             #Assert
@@ -46,8 +46,8 @@ RSpec.describe Bid, type: :model do
                             minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
             product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
                                     category: 'categoria', description: 'celular caro', lot_id: lot.id)
-            product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                    filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+            product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                    filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
             product.save!
             bid = Bid.create!(lot_id: lot.id, user_id: other_user.id, amount: 2500.0)
             other_bid = Bid.new(lot_id: lot.id, user_id: user, amount: 2510.0)

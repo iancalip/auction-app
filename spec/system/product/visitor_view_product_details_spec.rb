@@ -5,8 +5,8 @@ describe 'adm visit product details' do
         #Arrange
         product = Product.new(name: 'Iphone', weight: 400.0 , width: 10.0, height: 16.0, depth: 2.0,
                                 category: 'Celular', description: 'Descrição', lot_id: nil)
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
 
         #Act
@@ -28,7 +28,7 @@ describe 'adm visit product details' do
         expect(page).not_to have_link('Editar')
         expect(page).not_to have_link('Meus Lotes')
         expect(page).to have_link('Produtos')
-        expect(page).to have_selector("img[src$='product_iphone.jpg']")
+        expect(page).to have_selector("img[src$='Iphone.jpg']")
     end
 
     it 'sucessfully and sees products lot code' do
@@ -38,8 +38,8 @@ describe 'adm visit product details' do
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400.0 , width: 10.0, height: 16.0, depth: 2.0,
                                 category: 'Celular', description: 'Descrição', lot_id: lot.id)
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
 
         #Act
@@ -61,7 +61,7 @@ describe 'adm visit product details' do
         expect(page).not_to have_link('Editar')
         expect(page).not_to have_link('Meus Lotes')
         expect(page).to have_link('Produtos')
-        expect(page).to have_selector("img[src$='product_iphone.jpg']")
+        expect(page).to have_selector("img[src$='Iphone.jpg']")
     end
 
     it 'sucessfully and cant see products lot code' do
@@ -71,8 +71,8 @@ describe 'adm visit product details' do
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :pending)
         product = Product.new(name: 'Iphone', weight: 400.0 , width: 10.0, height: 16.0, depth: 2.0,
                                 category: 'Celular', description: 'Descrição', lot_id: lot.id)
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
 
         #Act
@@ -94,7 +94,7 @@ describe 'adm visit product details' do
         expect(page).not_to have_link('Editar')
         expect(page).not_to have_link('Meus Lotes')
         expect(page).to have_link('Produtos')
-        expect(page).to have_selector("img[src$='product_iphone.jpg']")
+        expect(page).to have_selector("img[src$='Iphone.jpg']")
     end
 
     it 'sucessfully and goes to product lot details' do
@@ -104,8 +104,8 @@ describe 'adm visit product details' do
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400.0 , width: 10.0, height: 16.0, depth: 2.0,
                                 category: 'Celular', description: 'Descrição', lot_id: lot.id)
-        product.image.attach(io: File.open(Rails.root.join('spec/support/product_iphone.jpg')),
-                                filename: 'product_iphone.jpg', content_type: 'product_iphone.jpg')
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
 
         #Act
@@ -127,6 +127,6 @@ describe 'adm visit product details' do
         expect(page).not_to have_link('Editar')
         expect(page).not_to have_link('Meus Lotes')
         expect(page).to have_link('Produtos')
-        expect(page).to have_selector("img[src$='product_iphone.jpg']")
+        expect(page).to have_selector("img[src$='Iphone.jpg']")
     end
 end

@@ -7,8 +7,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: '', weight: 8000, width: 70, height: 45, depth: 10,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -19,8 +19,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: nil, width: 70, height: 45, depth: 10,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -31,8 +31,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 8000 , width: nil, height: 45, depth: 10,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -43,8 +43,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 8000 , width: 70, height: nil, depth: 10,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -55,8 +55,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 8000 , width: 70, height: 45, depth: nil,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -67,8 +67,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 8000 , width: 70, height: 45, depth: 10,
                           category: '', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -79,8 +79,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 8000 , width: 70, height: 45, depth: 10,
                           category: 'categoria', description: '')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -91,8 +91,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 'abc', width: 70, height: 45, depth: 10,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
       #Assert
       expect(product).not_to be_valid
       expect(product.errors[:weight]).to include('não é um número')
@@ -102,8 +102,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 8000, width: 'abc', height: 45, depth: 10,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -114,8 +114,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 'abc' , width: 70, height: 'abc', depth: 10,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
 
       #Assert
       expect(product).not_to be_valid
@@ -126,8 +126,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 8000, width: 70, height: 45, depth: 'abc',
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
       #Assert
       expect(product).not_to be_valid
       expect(product.errors[:depth]).to include('não é um número')
@@ -137,8 +137,8 @@ RSpec.describe Product, type: :model do
       #Arrange
       product = Product.new(name: 'Produto', weight: 8000, width: 70, height: 45, depth: 10,
                           category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
       product.save
       #Assert
       expect(product.identifier).not_to be_nil
@@ -151,13 +151,13 @@ RSpec.describe Product, type: :model do
 
       product = Product.new(name: 'Produto', weight: 8000, width: 70, height: 45, depth: 10,
                                 category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                           filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                           filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
       product.save
       second_product = Product.new(name: 'Produto', weight: 8000, width: 70, height: 45, depth: 10,
                                    category: 'categoria', description: 'descrição')
-      second_product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                                  filename: 'test_image.jpg', content_type: 'image/jpeg')
+      second_product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                                  filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
       #Assert
       expect(product.identifier).to eq('ABCDE12345')
       expect(second_product).not_to be_valid
@@ -170,8 +170,8 @@ RSpec.describe Product, type: :model do
 
       product = Product.new(name: 'Produto', weight: 8000, width: 70, height: 45, depth: 10,
                 category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
       #Assert
       expect(product).not_to be_valid
       expect(product.errors[:identifier]).to include('não possui o tamanho esperado (10 caracteres)')
@@ -183,8 +183,8 @@ RSpec.describe Product, type: :model do
 
       product = Product.new(name: 'Produto', weight: 8000, width: 70, height: 45, depth: 10,
                 category: 'categoria', description: 'descrição')
-      product.image.attach(io: File.open(Rails.root.join('spec/support/test_image.jpg')),
-                          filename: 'test_image.jpg', content_type: 'image/jpeg')
+      product.image.attach(io: File.open(Rails.root.join('spec/support/Cadeira_Gamer.jpg')),
+                          filename: 'Cadeira_Gamer.jpg', content_type: 'image/jpeg')
       #Assert
       expect(product).not_to be_valid
       expect(product.errors[:identifier]).to include('não possui o tamanho esperado (10 caracteres)')

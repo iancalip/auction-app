@@ -15,7 +15,7 @@
 <% if current_user&.admin? %>
   <div class="d-flex mt-4 justify-content-start">
     <%= link_to 'Editar', edit_lot_path, class: "btn btn-sm btn-primary me-3" %>
-    <%= button_to "Aprovar", approve_status_lot_path(@lot), method: :patch, data: { confirm: "Tem certeza que deseja aprovar o lote?" }, class: "btn btn-success btn-sm me-3" if @lot.pending? && current_user.id != @lot.created_by_user_id %>
+    <%= button_to "Aprovar", approve_status_lot_path(@lot), method: :patch, data: { confirm: "Tem certeza que deseja aprovar o lote?" }, class: "btn btn-success btn-sm me-3" if @lot.check_approval(current_user) %>
     <%= button_to "Cancelar", cancel_status_lot_path(@lot), method: :patch, data: { confirm: "Tem certeza que deseja cancelar o lote?" }, class: "btn btn-danger btn-sm me-3" unless @lot.canceled? %>
     <%= link_to 'Adicionar Produto', assign_products_lot_path(@lot), class: 'btn btn-sm btn-primary' if @lot.pending?%>
   </div>
@@ -27,17 +27,22 @@
 <div class="d-flex justify-content-center mt-4"><h3> Produtos do Lote </h3></div>
 
 <% if @lot.products.any? %>
+  <div class="row">
     <% @products.each do |product| %>
+      <div class="col-sm-3">
         <div class="card" style="width: 13rem;">
-            <img src="<%= url_for(product.image) %>" class="card-img-top" alt="imagem do produto">
-            <div class="card-body">
+          <img src="<%= url_for(product.image) %>" class="card-img-top" alt="imagem do produto">
+          <div class="card-body">
             <h5 class="card-title"><%= product.name %></h5>
             <p class="card-text"><%= product.description %></p>
             <a href="<%= product_path(product) %>" class="btn btn-primary">Ver Detalhes</a>
-            </div>
+          </div>
         </div>
+      </div>
     <% end %>
+  </div>
 <% end %>
+
 
 
 

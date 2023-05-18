@@ -64,14 +64,12 @@ class LotsController < ApplicationController
         redirect_to expired_lots_path, notice: 'Lote encerrado com sucesso!'
     end
 
-
     def expired
         @approved_lots = Lot.where('end_date < ? AND status = ?', Date.current, 4)
-        @pending_lots = Lot.where('end_date < ? AND status = ?', Date.current, 6)
+        @pending_lots = Lot.where('end_date < ? AND status = ?', Date.current, 0)
         @closed_lots = Lot.where(status: 6)
         @canceled_lots = Lot.where(status: 8)
     end
-
 
     def assign_products
         @products = Product.where('lot_id IS NULL OR lot_id = ?', @lot.id)

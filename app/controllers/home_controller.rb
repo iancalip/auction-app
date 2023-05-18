@@ -8,6 +8,14 @@ class HomeController < ApplicationController
         end
     end
 
+    def search
+        if current_user&.admin?
+            @lots = Lot.search_adm(params[:q]).distinct
+        else
+            @lots = Lot.ongoing_lots.search(params[:q]).distinct
+        end
+        render :index
+    end
 
     private
 

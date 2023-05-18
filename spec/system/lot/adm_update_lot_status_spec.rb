@@ -8,7 +8,7 @@ describe 'Adm update status' do
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.9,
                         minimum_bid_difference: 19.9, created_by_user: other_adm)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
@@ -37,7 +37,7 @@ describe 'Adm update status' do
         login_as(adm)
         visit root_path
         click_on 'Ver Detalhes'
-        click_on 'Aprovar'
+
         #Assert
         expect(current_path).to eq lot_path(lot)
         expect(lot.reload.status).to eq 'pending'
@@ -52,9 +52,9 @@ describe 'Adm update status' do
         # Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 9.days.ago, end_date: 3.days.ago, minimum_bid: 49.9,
-                        minimum_bid_difference: 19.9, created_by_user: adm)
+                        minimum_bid_difference: 19.9, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!

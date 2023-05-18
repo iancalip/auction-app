@@ -7,7 +7,7 @@ describe 'adm tries to see expired lots' do
         lot = Lot.create!(code: 'ABC123456', start_date: 5.days.ago, end_date: 3.days.ago, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
@@ -33,7 +33,7 @@ describe 'adm tries to see expired lots' do
         lot = Lot.create!(code: 'ABC123456', start_date: 5.days.ago, end_date: 3.days.ago, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!

@@ -41,7 +41,7 @@ describe 'User visit homepage' do
         lot = Lot.create!(code: 'ABC123456', start_date: Date.current, end_date: 3.days.from_now, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
@@ -69,7 +69,7 @@ describe 'User visit homepage' do
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 2500.0,
                          minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
@@ -99,7 +99,7 @@ describe 'User visit homepage' do
         other_lot = Lot.create!(code: 'XYZ987654', start_date: Date.current, end_date: 3.days.from_now, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :approved)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
@@ -136,7 +136,7 @@ describe 'User visit homepage' do
         lot = Lot.create!(code: 'ABC123456', start_date: Date.current, end_date: 3.days.from_now, minimum_bid: 2500.0,
                         minimum_bid_difference: 70.0, created_by_user: adm, status: :pending)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: adm.id)
+                                category: 'categoria', description: 'Descrição', lot_id: adm.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!

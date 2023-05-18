@@ -34,8 +34,8 @@
               <% end %>
             </ul>
 
-            <form class="d-flex ms-auto" action="/search" method="get">
-              <%= text_field_tag :q, nil, placeholder: "Pesquisar produtos e lotes...", class: "form-control me-2" %>
+            <form class="d-flex ms-auto" action="<%=search_path%>" method="get">
+              <%= text_field_tag :q, nil, placeholder: "Pesquisar Produtos em Lotes", class: "form-control me-2" %>
               <%= button_tag type: 'submit', class: "btn btn-primary btn-sm" do %>
                 Pesquisar
               <% end %>
@@ -57,9 +57,12 @@
       <% end %>
     </div>
     <main class='m-4'>
-      <% if alert.present? || notice.present? %>
+      <% if alert.present? %>
         <div class="alert alert-danger">
           <%= alert %>
+        </div>
+      <% elsif notice.present? %>
+        <div class="alert alert-primary">
           <%= notice %>
         </div>
       <% end %>

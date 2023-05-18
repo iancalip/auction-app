@@ -43,4 +43,16 @@ class Lot < ApplicationRecord
     def winner(current_user)
         highest_bid.user == current_user
     end
+
+    def self.search(query)
+        approved.joins(:products).where("lots.code LIKE ? OR products.name LIKE ?", "%#{query}%", "%#{query}%")
+    end
+
+    def self.search_adm(query)
+        left_outer_joins(:products).where("lots.code LIKE ? OR products.name LIKE ?", "%#{query}%", "%#{query}%")
+    end
+
+    def self.ongoing_lots
+        where('end_date > ? AND status = ?', Date.current, 4)
+    end
 end

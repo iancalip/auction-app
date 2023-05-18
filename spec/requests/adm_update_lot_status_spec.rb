@@ -8,7 +8,7 @@ describe 'Adm log in' do
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.9,
                         minimum_bid_difference: 19.9, created_by_user: adm)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!
@@ -28,7 +28,7 @@ describe 'Adm log in' do
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.90,
                         minimum_bid_difference: 19.90, created_by_user: adm)
         product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
-                                category: 'categoria', description: 'celular caro', lot_id: lot.id)
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
         product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
                                 filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
         product.save!

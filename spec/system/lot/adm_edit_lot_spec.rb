@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User log in' do
+describe 'Adm login' do
     it 'and sees edit page' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')

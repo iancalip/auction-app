@@ -27,16 +27,14 @@
 <div class="d-flex justify-content-center mt-4"><h3> Produtos do Lote </h3></div>
 
 <% if @lot.products.any? %>
-  <div class="row">
+  <div class="d-flex flex-wrap justify-content-center">
     <% @products.each do |product| %>
-      <div class="col-sm-3">
-        <div class="card" style="width: 13rem;">
-          <img src="<%= url_for(product.image) %>" class="card-img-top" alt="imagem do produto">
-          <div class="card-body">
-            <h5 class="card-title"><%= product.name %></h5>
-            <p class="card-text"><%= product.description %></p>
-            <a href="<%= product_path(product) %>" class="btn btn-primary">Ver Detalhes</a>
-          </div>
+      <div class="card m-3 w-20" style="width: 18rem;">
+        <img src="<%= url_for(product.image) %>" class="card-img-top fixed-height" alt="imagem do produto">
+        <div class="card-body">
+          <h5 class="card-title"><%= product.name %></h5>
+          <p class="card-text"><%= product.description %></p>
+          <a href="<%= product_path(product) %>" class="btn btn-primary">Ver Detalhes</a>
         </div>
       </div>
     <% end %>

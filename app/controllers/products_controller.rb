@@ -2,8 +2,13 @@ class ProductsController < ApplicationController
     before_action :set_product, only: [:show, :edit, :update]
 
     def index
-        @products = Product.all
+        if current_user&.admin?
+            @products = Product.all
+        else
+            @products = Product.joins(:lot).where("lots.status = ? AND lots.end_date > ?", 4, Date.current)
+        end
     end
+
 
     def show; end
 

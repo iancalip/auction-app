@@ -9,7 +9,7 @@ describe 'User visit homepage' do
         login_as user
         visit root_path
         #Assert
-        expect(page).to have_link('Leilão')
+        expect(page).to have_link('LeilON')
         expect(page).to have_content("#{user.name}")
         expect(page).to have_content("#{user.email}")
         expect(page).not_to have_link('Sair')

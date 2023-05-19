@@ -11,7 +11,7 @@ describe 'Visitor' do
         click_on 'Ver Detalhes'
         #Assert
         expect(current_path).to eq lot_path(lot)
-        expect(page).to have_link('Leilão')
+        expect(page).to have_link('LeilON')
         expect(page).to have_link('Login')
         expect(page).to have_content('Detalhes do Lote')
         expect(page).to have_content('Código do Lote: ABC123456')

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'user search lot from homepage' do
+describe 'visitor search lot from homepage' do
     it 'successfully using product name' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '51959723030', email: 'adm@leilaodogalpao.com.br', password: 'password')
@@ -29,7 +29,7 @@ describe 'user search lot from homepage' do
             expect(page).to have_field('Pesquisar Produtos em Lotes')
             expect(page).to have_button('Pesquisar')
             expect(page).to have_link('Login')
-            expect(page).to have_link('Leilão')
+            expect(page).to have_link('LeilON')
         end
         expect(current_path).to eq search_path
         expect(page).to have_content("Resultado da Busca por: #{product.name}")

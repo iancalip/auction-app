@@ -13,7 +13,7 @@ describe 'User log in' do
         click_on 'Ver Detalhes'
         #Assert
         expect(current_path).to eq lot_path(lot)
-        expect(page).to have_link('Leilão')
+        expect(page).to have_link('LeilON')
         expect(page).to have_button('Sair')
         expect(page).to have_content("#{user.name}")
         expect(page).to have_content("#{user.email}")

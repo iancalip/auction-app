@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'visit tries to see the bid form' do
+describe 'visitor tries to see the bid form' do
     it 'sucessfully' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '51959723030', email: 'adm@leilaodogalpao.com.br', password: 'password')

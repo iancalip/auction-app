@@ -8,7 +8,7 @@ describe 'Visitor visits homepage' do
         visit root_path
 
         #Assert
-        expect(page).to have_content('Leilão')
+        expect(page).to have_content('LeilON')
         expect(page).to have_link('Login')
         expect(page).to have_content('Não existem lotes cadastrados')
         expect(page).not_to have_css("img")

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'User log in' do
-    it 'and sees link to create lot if admin' do
+describe 'Adm log in' do
+    it 'and sees link to create lot' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
         #Act

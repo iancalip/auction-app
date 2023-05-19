@@ -4,20 +4,18 @@
       <h2 class="text-center m-4"><%= title %></h2>
     </div>
   </div>
-  <div class="row">
+<div class="d-flex flex-wrap justify-content-center">
     <% lots.each do |lot| %>
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-          <% if lot.products.first&.image&.attached? %>
-            <%= image_tag lot.products.first.image, class: "card-img-top", alt: "image" %>
-          <% else %>
-            <img src="..." class="card-img-top" alt="image">
-          <% end %>
-          <div class="card-body">
-            <h5 class="card-title"><%= lot.code %></h5>
-            <p class="card-text"><%= lot.start_date.strftime("%d/%m/%Y") %> - <%= lot.end_date.strftime("%d/%m/%Y") %></p>
-            <%= link_to 'Ver Detalhes', lot_path(lot), class: 'btn btn-primary' %>
-          </div>
+      <div class="card m-3 w-20" style="width: 18rem;">
+        <% if lot.products.first&.image&.attached? %>
+          <%= image_tag lot.products.first.image, class: "card-img-top fixed-height", alt: "image" %>
+        <% else %>
+          <img src="..." class="card-img-top" alt="image">
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= lot.code %></h5>
+          <p class="card-text"><%= lot.start_date.strftime("%d/%m/%Y") %> - <%= lot.end_date.strftime("%d/%m/%Y") %></p>
+          <%= link_to 'Ver Detalhes', lot_path(lot), class: 'btn btn-primary' %>
         </div>
       </div>
     <% end %>

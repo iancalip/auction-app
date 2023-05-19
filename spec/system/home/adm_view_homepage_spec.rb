@@ -9,11 +9,10 @@ describe 'Admin view homepage' do
         visit root_path
 
         #Assert
-        expect(page).to have_link('Leilão')
+        expect(page).to have_link('LeilON')
         expect(page).to have_button('Sair')
         expect(page).to have_content("#{adm.name}")
         expect(page).to have_content("#{adm.email}")
-        expect(page).to have_content('Leilão')
         expect(page).to have_content('Não existem lotes cadastrados')
         expect(page).not_to have_selector("img[src$='Iphone.jpg']")
         expect(page).not_to have_content('Lotes Disponíveis')

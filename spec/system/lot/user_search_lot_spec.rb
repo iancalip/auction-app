@@ -31,7 +31,7 @@ describe 'user search lot from homepage' do
             expect(page).to have_field('Pesquisar Produtos em Lotes')
             expect(page).to have_button('Pesquisar')
             expect(page).to have_button('Sair')
-            expect(page).to have_link('Leilão')
+            expect(page).to have_link('LeilON')
             expect(page).to have_content('user | user@email.com')
         end
         expect(current_path).to eq search_path

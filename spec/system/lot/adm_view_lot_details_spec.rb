@@ -15,7 +15,7 @@ describe 'Adm logs in' do
 
         #Assert
         expect(current_path).to eq lot_path(lot)
-        expect(page).to have_link('Leilão')
+        expect(page).to have_link('LeilON')
         expect(page).to have_button('Sair')
         expect(page).to have_content("#{adm.name}")
         expect(page).to have_content("#{adm.email}")

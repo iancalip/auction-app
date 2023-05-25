@@ -56,7 +56,6 @@ describe 'Adm logs in' do
         expect(page).not_to have_button('Aprovar')
     end
 
-
     it 'and sees approve button' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')

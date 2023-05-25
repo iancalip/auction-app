@@ -43,19 +43,30 @@ describe 'Visitor' do
         expect(page).to have_content('Ver Detalhes')
     end
 
-    it 'cant see adm features' do
+    it 'but cant see adm features' do
         #Arrange
         adm = User.create!(name: 'adm', cpf: '02324252481', email: 'adm@leilaodogalpao.com.br', password: 'password')
+        user = User.create!(name: 'user', cpf: '96267093085', email: 'user@email.com.br', password: 'password')
         lot = Lot.create!(code: 'ABC123456', start_date: 1.day.from_now, end_date: 3.days.from_now, minimum_bid: 49.90,
                         minimum_bid_difference: 19.90, created_by_user: adm, status: :approved)
+        product = Product.new(name: 'Iphone', weight: 400 , width: 10, height: 16, depth: 2,
+                                category: 'categoria', description: 'Descrição', lot_id: lot.id)
+        product.image.attach(io: File.open(Rails.root.join('spec/support/Iphone.jpg')),
+                                filename: 'Iphone.jpg', content_type: 'Iphone.jpg')
+        product.save!
+        question = Question.create!(user_id: user.id, lot_id: lot.id, content: 'Data de envio?')
+
         #Act
-        visit lot_path(lot)
+        visit root_path
+        click_on 'Ver Detalhes'
 
         #Assert
         expect(page).not_to have_button('Aprovar')
         expect(page).not_to have_link('Editar')
         expect(page).not_to have_button('Adicionar Produto')
         expect(page).not_to have_button('Cancelar')
+        expect(page).not_to have_button('Ocultar')
+        expect(page).not_to have_button('Responder')
         expect(page).not_to have_content('Status: Aprovado')
     end
 

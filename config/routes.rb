@@ -13,5 +13,8 @@ Rails.application.routes.draw do
     end
     get 'expired', on: :collection
     resources :bids, only: [:create]
+    resources :questions, only: [:create, :update] do
+      resources :answers, only: [:create]
+    end
   end
 end

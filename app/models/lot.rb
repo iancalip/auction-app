@@ -2,6 +2,7 @@ class Lot < ApplicationRecord
 
     has_many :products
     has_many :bids
+    has_many :questions
 
     enum status: { pending: 0, approved: 4, closed: 6, canceled: 8 }
 

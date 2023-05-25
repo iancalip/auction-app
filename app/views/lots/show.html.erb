@@ -24,6 +24,8 @@
 
 <%= render 'bids/bidform' if @lot.ongoing? %>
 
+<%= render 'lots/questions' if @lot.approved? %>
+
 <div class="d-flex justify-content-center mt-4"><h3> Produtos do Lote </h3></div>
 
 <% if @lot.products.any? %>

@@ -366,3 +366,13 @@ Bid.create!(user_id: user.id, lot_id: second_expired_closed_lot.id, amount: 850)
 Bid.create!(user_id: other_user.id, lot_id: second_expired_closed_lot.id, amount: 885)
 Bid.create!(user_id: user.id, lot_id: second_expired_closed_lot.id, amount: 920)
 Bid.create!(user_id: other_user.id, lot_id: second_expired_closed_lot.id, amount: 1000)
+
+
+Question.create!(user_id: user.id, lot_id: first_ongoing_approved_lot.id, content: 'Quantos dias após o encerramento do lote serão enviados os produtos?')
+Answer.create!(user_id: adm.id, question_id: Question.last.id, content: 'Três dias úteis após o encerramento do lote.')
+
+Question.create!(user_id: other_user.id, lot_id: first_upcoming_approved_lot.id, content: 'O produto é novo?')
+Answer.create!(user_id: other_adm.id, question_id: Question.last.id, content: 'Sim e ainda contém uma garantia de um ano.')
+
+Question.create!(user_id: user.id, lot_id: third_ongoing_approved_lot.id, content: 'Vêm com dois controles entao?')
+

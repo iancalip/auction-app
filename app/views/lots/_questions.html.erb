@@ -1,0 +1,55 @@
+<% if @lot.questions.select {|q| !q.hidden? }.any? %>
+  <div class="mt-4">
+    <h3 class="d-flex justify-content-center m-4">Dúvidas:</h3>
+    <% @lot.questions.each do |question| %>
+        <div class="card my-2">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title me-2"><%= question.user.name %>:</h5>
+                        <p class="card-text me-2"><%= question.content %></p>
+                    </div>
+                    <div>
+                        <%= button_to 'Ocultar', lot_question_path(@lot, question, question: { hidden: true }), method: :patch, remote: true, class: "btn btn-sm btn-danger mt-3" if current_user&.admin? %>
+                    </div>
+                </div>
+                <% if current_user&.admin? %>
+                    <%= form_with(model: [ @lot, question, question.answers.build ], local: true, method: :post) do |form| %>
+                        <div class="form-group">
+                            <%= form.label :content, 'Resposta:', class: 'm-2' %>
+                            <%= form.text_area :content, class: 'form-control', placeholder: 'Digite sua resposta aqui' %>
+                            <%= form.submit 'Responder', class: "btn btn-sm btn-success my-4" %>
+                        </div>
+                    <% end %>
+                <% end %>
+                <% if question.answers.exists? %>
+                    <% question.answers.select { |a| a.content.present? }.each do |answer| %>
+                        <div class="card mt-2">
+                            <div class="card-body d-flex justify-content-start">
+                            <h5 class="card-title me-2">LeilON:</h5>
+                            <p class="card-text"><%= answer.content %></p>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if user_signed_in? && !current_user.admin? %>
+  <div class="mt-4">
+    <h3 class="d-flex justify-content-center m-4">Faça uma Pergunta:</h3>
+    <%= form_with(model: [ @lot, @lot.questions.build ], local: true) do |form| %>
+      <div class="form-group">
+        <% form.label :content %>
+        <%= form.text_area :content, class: 'form-control', placeholder: 'Digite sua pergunta aqui' %>
+      </div>
+      <div class="mt-4">
+      <%= form.submit 'Enviar Pergunta', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

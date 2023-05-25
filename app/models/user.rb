@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+
+  has_many :questions
+  has_many :answers
+
   validates :cpf, presence: true
   validates :cpf, uniqueness: true
   validates :cpf, length: { is: 11, message: "deve conter 11 dígitos" }
